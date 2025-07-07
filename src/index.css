@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
+@theme static {
+
+  --color-primary: #3D365C;
+  --color-secondary: #FFAD60;
+  --color-accent: #FFD63A;
+}
+
+
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
+
+*{
+    font-family: "Urbanist", sans-serif;
+}
+
