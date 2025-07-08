@@ -26,7 +26,7 @@ const Banner = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="/register"
-              className="bg-secondary hover:bg-accent font-semibold py-3 px-6 rounded-xl shadow hover:opacity-90 transition max-w-[160px] flex items-center gap-2"
+              className="bg-secondary text-accent hover:bg-accent hover:text-primary font-semibold py-3 px-6 rounded-xl shadow hover:opacity-90 transition max-w-[160px] flex items-center gap-2"
             >
                 Join Now
              <FaArrowRightLong /> 

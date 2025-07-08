@@ -4,8 +4,8 @@
 @theme static {
 
   --color-primary: #3D365C;
-  --color-secondary: #FFAD60;
-  --color-accent: #FFD63A;
+  --color-secondary:#5459AC ;
+  --color-accent: #91C8E4
 }
 
 
@@ -16,3 +16,4 @@
     font-family: "Urbanist", sans-serif;
 }
 
+/* #FFAD60; */

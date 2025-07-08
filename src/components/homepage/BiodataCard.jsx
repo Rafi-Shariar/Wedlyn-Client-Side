@@ -63,7 +63,7 @@ const BiodataCard = ({ biodata }) => {
       <div className="px-4 pb-4">
         <Button
           color="none"
-          className="w-full bg-secondary hover:bg-accent text-white font-medium py-2 rounded-xl transition-all duration-300"
+          className="w-full bg-secondary hover:bg-accent hover:cursor-pointer text-white font-medium py-2 rounded-xl transition-all duration-300"
         >
           View Profile
         </Button>
