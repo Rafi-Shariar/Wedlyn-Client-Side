@@ -25,9 +25,12 @@ const Navbar2 = () => {
         Contact Us
       </NavLink>
       <h1 className="hidden md:inline text-4xl text-white">|</h1>
-      <Button color="none" className="bg-secondary hover:bg-accent">
+     
+     <NavLink to={'/login'}>
+       <Button color="none" className="bg-secondary hover:bg-accent">
         Login
       </Button>
+     </NavLink>
     </>
   );
 
