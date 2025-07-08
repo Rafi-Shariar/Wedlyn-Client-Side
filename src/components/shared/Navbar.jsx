@@ -30,7 +30,7 @@ const Navbar2 = () => {
   );
 
   return (
-    <header className="bg-primary max-w-7xl mx-auto rounded-3xl mt-2">
+    <header className=" bg-primary max-w-7xl mx-auto rounded-3xl mt-2 ">
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
         {/* Logo & Brand */}
         <div className="flex items-center space-x-3">
