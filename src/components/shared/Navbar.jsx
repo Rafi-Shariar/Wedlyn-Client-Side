@@ -8,7 +8,7 @@ const Navbar2 = () => {
   const navLinkClass = ({ isActive }) =>
     isActive
       ? "text-secondary font-medium underline"
-      : "text-white hover:text-blue-400 transition";
+      : "text-white hover:text-secondary transition";
 
   const links = (
     <>
