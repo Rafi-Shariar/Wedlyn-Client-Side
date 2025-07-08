@@ -10,7 +10,7 @@ const PremiumMembers = () => {
 
     useEffect(()=>{
 
-        axios.get(`${import.meta.env.VITE_URL}/biodatas`)
+        axios.get(`${import.meta.env.VITE_URL}/biodatas?category=premium&limit=6`)
         .then((res)=>{
             setBioDatas(res.data);
             setLoading(false);

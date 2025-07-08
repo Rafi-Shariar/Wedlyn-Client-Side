@@ -3,6 +3,7 @@ import RootLayout from "../layouts/RootLayout";
 import Homepage from "../pages/Homepage";
 import AboutUsPage from "../pages/AboutUsPage";
 import ContactUsPage from "../pages/ContactUsPage";
+import { BiodatasPage } from "../pages/BioDatasPage";
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +12,9 @@ export const router = createBrowserRouter([
     children:[
       {index:true, element:<Homepage></Homepage>},
       {path:'/aboutus',element:<AboutUsPage></AboutUsPage>},
+      
       {path:'/contactus',element:<ContactUsPage></ContactUsPage>},
+      {path:'/biodatas',element:<BiodatasPage></BiodatasPage>},
     ]
   },
 ]);
