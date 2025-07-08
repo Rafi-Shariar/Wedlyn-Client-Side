@@ -51,8 +51,9 @@ const LoginPage = () => {
             navigate(location.state? location.state : '/');
         })
         .catch(() =>{
-            errorToast();
+            
         })
+        navigate(location.state? location.state : '/');
     })
   };
 

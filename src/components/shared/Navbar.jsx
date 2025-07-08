@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { Button } from "flowbite-react";
+import { AuthContext } from "../../context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
+const successToast = () => toast.success("Logout Successful");
+const errorToast = () => toast.error("Error logging out! Try Again.");
 const Navbar2 = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOutUser } = use(AuthContext);
+
+  const handleLogout = () => {
+    logOutUser()
+      .then(() => {
+        successToast();
+      })
+      .catch(() => {
+        errorToast();
+      });
+  };
 
   const navLinkClass = ({ isActive }) =>
     isActive
@@ -24,13 +39,41 @@ const Navbar2 = () => {
       <NavLink to="/contactus" className={navLinkClass}>
         Contact Us
       </NavLink>
-      <h1 className="hidden md:inline text-4xl text-white">|</h1>
-     
-     <NavLink to={'/login'}>
-       <Button color="none" className="bg-secondary hover:bg-accent">
-        Login
-      </Button>
-     </NavLink>
+      <h1 className="hidden lg:inline text-4xl text-white">|</h1>
+
+      <NavLink to={"/login"}>
+        <Button color="none" className="bg-secondary hover:bg-accent">
+          Login
+        </Button>
+      </NavLink>
+    </>
+  );
+
+  const loggedInLinks = (
+    <>
+      <NavLink to="/" className={navLinkClass}>
+        Home
+      </NavLink>
+      <NavLink to="/biodatas" className={navLinkClass}>
+        Biodatas
+      </NavLink>
+      <NavLink to="/aboutus" className={navLinkClass}>
+        About Us
+      </NavLink>
+      <NavLink to="/contactus" className={navLinkClass}>
+        Contact Us
+      </NavLink>
+      <h1 className="hidden lg:inline text-4xl text-white">|</h1>
+      <NavLink to={"/dashboard"}>
+        <Button color="none" className="bg-yellow-300 hover:bg-accent">
+          Dashboard
+        </Button>
+      </NavLink>
+      <NavLink to={"/login"}>
+        <Button color="none" className="bg-secondary hover:bg-accent" onClick={handleLogout}>
+          Logout
+        </Button>
+      </NavLink>
     </>
   );
 
@@ -43,11 +86,11 @@ const Navbar2 = () => {
             <span className="text-white text-2xl font-semibold">Wedlyn</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-6 text-lg">
-            {links}
+          <div className="hidden lg:flex items-center gap-6 text-lg">
+            {user ? loggedInLinks : links}
           </div>
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white focus:outline-none"
@@ -79,11 +122,12 @@ const Navbar2 = () => {
         </nav>
 
         {isOpen && (
-          <div className="md:hidden px-4 pb-4 space-y-3 bg-gray-900 flex flex-col">
-            {links}
+          <div className="lg:hidden px-4 pb-4 space-y-3 bg-gray-900 flex flex-col pt-5">
+            {user ? loggedInLinks : links}
           </div>
         )}
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
