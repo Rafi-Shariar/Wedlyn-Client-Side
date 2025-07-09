@@ -47,7 +47,7 @@ const SuccessStories = () => {
         ) : (
           <>
             
-              <Marquee pauseOnHover={true}>
+              <Marquee >
                {
                 stories.map(story => <StoryCard key={story._id} story={story}></StoryCard>)
                }

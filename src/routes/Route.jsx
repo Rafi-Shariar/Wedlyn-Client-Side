@@ -11,6 +11,7 @@ import PrivateRoute from '../privateRoutes/PrivateRoute';
 import LottiLoading from "../components/shared/LottiLoading";
 import CheckoutPage from "../pages/CheckoutPage";
 import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,12 @@ export const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>
+    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children:[
+      {index:true, element:<DashboardHome></DashboardHome>},
+      {}
+
+    ]
   }
 ]);
 

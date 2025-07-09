@@ -15,43 +15,77 @@ const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { userInfo } = use(AuthContext);
 
-  const userlinks = <>
-        
-        <h1 className="text-gray-400">Menu</h1>
-        <NavLink to={'/dashboard'}><MdDashboard className="inline mr-2 mb-1"/>Dashboard</NavLink>
-        <NavLink to={'/editbiodata'}><FaPenAlt className="inline mr-2 mb-1"/>Edit Biodata</NavLink>
-        <NavLink to={'/viewbiodata'}><CiViewList className="inline mr-2 mb-1"/>View Biodata</NavLink>
-        <NavLink to={'/mycontactrequest'}><VscGitPullRequestGoToChanges className="inline mr-2 mb-1"/>My Contact Request</NavLink>
-        <NavLink to={'/favouritebiodata'}><IoHeartCircleOutline className="inline mr-2 mb-1"/>Favourite Biodata</NavLink>
+  const userlinks = (
+    <>
+      <h1 className="text-gray-400">Menu</h1>
+      <NavLink to={"/dashboard"}>
+        <MdDashboard className="inline mr-2 mb-1" />
+        Dashboard
+      </NavLink>
+      <NavLink to={"/editbiodata"}>
+        <FaPenAlt className="inline mr-2 mb-1" />
+        Edit Biodata
+      </NavLink>
+      <NavLink to={"/viewbiodata"}>
+        <CiViewList className="inline mr-2 mb-1" />
+        View Biodata
+      </NavLink>
+      <NavLink to={"/mycontactrequest"}>
+        <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
+        My Contact Request
+      </NavLink>
+      <NavLink to={"/favouritebiodata"}>
+        <IoHeartCircleOutline className="inline mr-2 mb-1" />
+        Favourite Biodata
+      </NavLink>
 
-        <div className="flex flex-col gap-3 mt-20">
-         <h1 className="text-gray-400">General</h1>
-         <NavLink to={'/'}><FaArrowLeftLong className="inline mr-2 mb-1"/>Back to Website</NavLink>
-         <button className="bg-red-500 rounded-2xl py-2 w-[130px] hover:bg-red-300">
-            <BiLogOut className="inline mr-2 mb-1"/>Logout
-         </button>
-       </div>
-  </>
+      <div className="flex flex-col gap-3 mt-20">
+        <h1 className="text-gray-400">General</h1>
+        <NavLink to={"/"}>
+          <FaArrowLeftLong className="inline mr-2 mb-1" />
+          Back to Website
+        </NavLink>
+        <button className="bg-red-500 rounded-2xl py-2 w-[130px] hover:bg-red-300">
+          <BiLogOut className="inline mr-2 mb-1" />
+          Logout
+        </button>
+      </div>
+    </>
+  );
 
-  const adminlinks = <>
+  const adminlinks = (
+    <>
+      <h1 className="text-gray-400">Menu</h1>
+      <NavLink to={"/dashboard"}>
+        <MdDashboard className="inline mr-2 mb-1" />
+        Dashboard
+      </NavLink>
+      <NavLink to={"/manageusers"}>
+        <FaPenAlt className="inline mr-2 mb-1" />
+        Manage Users
+      </NavLink>
+      <NavLink to={"/approvedpremium"}>
+        <CiViewList className="inline mr-2 mb-1" />
+        Approved Premium
+      </NavLink>
+      <NavLink to={"/approvedcontactrequest"}>
+        <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
+        Approved Contact Request
+      </NavLink>
 
-  <h1 className="text-gray-400">Menu</h1>
-        <NavLink to={'/dashboard'}><MdDashboard className="inline mr-2 mb-1"/>Dashboard</NavLink>
-        <NavLink to={'/manageusers'}><FaPenAlt className="inline mr-2 mb-1"/>Manage Users</NavLink>
-        <NavLink to={'/approvedpremium'}><CiViewList className="inline mr-2 mb-1"/>Approved Premium</NavLink>
-        <NavLink to={'/approvedcontactrequest'}><VscGitPullRequestGoToChanges className="inline mr-2 mb-1"/>Approved Contact Request</NavLink>
-
-        <div className="flex flex-col gap-3 mt-20">
-         <h1 className="text-gray-400">General</h1>
-         <NavLink to={'/'}><FaArrowLeftLong className="inline mr-2 mb-1"/>Back to Website</NavLink>
-         <button className="bg-red-500 rounded-2xl py-2 w-[130px] hover:bg-red-300">
-            <BiLogOut className="inline mr-2 mb-1"/>Logout
-         </button>
-       </div>
-
-
-  
-  </>
+      <div className="flex flex-col gap-3 mt-20">
+        <h1 className="text-gray-400">General</h1>
+        <NavLink to={"/"}>
+          <FaArrowLeftLong className="inline mr-2 mb-1" />
+          Back to Website
+        </NavLink>
+        <button className="text-start hover:cursor-pointer">
+          <BiLogOut className="inline mr-2 mb-1" />
+          Logout
+        </button>
+      </div>
+    </>
+  );
 
   return (
     <div>
@@ -67,9 +101,11 @@ const DashboardLayout = () => {
                 </span>
               </div>
               <nav className="space-y-4 mt-10 flex flex-col text-white">
-                {
-                    userInfo?.role == 'admin' ? (<>{adminlinks}</>) : (<>{userlinks}</>)
-                }
+                {userInfo?.role == "admin" ? (
+                  <>{adminlinks}</>
+                ) : (
+                  <>{userlinks}</>
+                )}
               </nav>
             </aside>
 
@@ -98,24 +134,43 @@ const DashboardLayout = () => {
                 </button>
               </div>
               <nav className="p-4 space-y-4 text-white flex flex-col">
-                 {
-                    userInfo?.role == 'admin' ? (<>{adminlinks}</>) : (<>{userlinks}</>)
-                }
+                {userInfo?.role == "admin" ? (
+                  <>{adminlinks}</>
+                ) : (
+                  <>{userlinks}</>
+                )}
               </nav>
             </aside>
 
             {/* Main content */}
             <div className="flex-1 flex flex-col">
               {/* Top Navbar */}
-              <header className="bg-white shadow px-4 py-3 flex items-center justify-between ">
+              <header className="bg-slate-100 shadow px-4 py-3 flex items-center justify-between ">
+
+
                 <div className="lg:hidden">
                   <button onClick={() => setSidebarOpen(true)}>
                     <BsLayoutSidebar size={24} />
                   </button>
                 </div>
-                <h1 className="text-lg font-semibold text-primary">
-                  Dashboard
-                </h1>
+
+
+
+                <div className="flex items-center gap-4">
+                  <img
+                    src={userInfo?.photourl} // Replace with actual user photo URL
+                    alt="User"
+                    className="w-12 h-12 rounded-full object-cover border-2 border-primary"
+                  />
+                  <div>
+                    <h1 className="text-lg font-semibold text-primary">
+                      {userInfo?.name}
+                    </h1>
+                    <p className="text-sm text-gray-600">
+                      {userInfo?.email}
+                    </p>
+                  </div>
+                </div>
               </header>
 
               {/* Page content */}
