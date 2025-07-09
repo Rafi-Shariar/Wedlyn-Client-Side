@@ -72,7 +72,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
     <div>
       {/* PersonalInfo */}
       <section className="flex justify-center items-center bg-white px-4 py-10">
-        <div className="flex flex-col md:flex-row max-w-3xl w-full rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex flex-col md:flex-row max-w-4xl w-full rounded-2xl shadow-2xl overflow-hidden">
           {/* Profile Image */}
           <div className="md:w-1/2 w-full">
             <img
@@ -250,7 +250,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
 
               <div className="text-center">
                 <Link
-                  to={`/checkout/:${biodataId}`}
+                  to={`/checkout`}
                   className="bg-yellow-300 p-3 px-6 border rounded-3xl font-semibold hover:border-yellow-300 hover:bg-white hover:text-yellow-400"
                 >
                   Request Contact Information

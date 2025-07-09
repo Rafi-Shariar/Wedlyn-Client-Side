@@ -9,6 +9,8 @@ import RegisterPage from "../pages/Auth/RegisterPage";
 import BiodataDetailsPage from "../pages/BiodataDetailsPage";
 import PrivateRoute from '../privateRoutes/PrivateRoute';
 import LottiLoading from "../components/shared/LottiLoading";
+import CheckoutPage from "../pages/CheckoutPage";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +26,12 @@ export const router = createBrowserRouter([
       {path:'/register',element:<RegisterPage></RegisterPage>},
       {path:'/test',element:<LottiLoading></LottiLoading>},
       {path:'/biodatadetails/:id',element:<PrivateRoute><BiodataDetailsPage></BiodataDetailsPage></PrivateRoute>},
+      {path:'/checkout',element:<PrivateRoute> <CheckoutPage></CheckoutPage> </PrivateRoute>},
     ]
   },
+  {
+    path:'/dashboard',
+    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>
+  }
 ]);
 
