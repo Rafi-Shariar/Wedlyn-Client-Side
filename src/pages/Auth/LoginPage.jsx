@@ -13,6 +13,8 @@ const LoginPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    // TODO:password validation
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -61,7 +63,7 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary/75 via-primary to-primary/75 rounded-2xl mt-10 p-3">
       <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row bg-white shadow-2xl rounded-2xl overflow-hidden animate-fade-in">
         {/* Left: Illustration */}
-        <div className="hidden md:flex items-center justify-center w-1/2 bg-purple-100 p-10">
+        <div className="flex items-center justify-center md:w-1/2 bg-purple-100 p-10">
           <img src={pic} alt="Wedding Illustration" className="max-w-full h-auto" />
         </div>
 

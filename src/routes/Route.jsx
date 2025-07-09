@@ -5,6 +5,7 @@ import AboutUsPage from "../pages/AboutUsPage";
 import ContactUsPage from "../pages/ContactUsPage";
 import { BiodatasPage } from "../pages/BioDatasPage";
 import LoginPage from "../pages/Auth/LoginPage";
+import RegisterPage from "../pages/Auth/RegisterPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
       {path:'/contactus',element:<ContactUsPage></ContactUsPage>},
       {path:'/biodatas',element:<BiodatasPage></BiodatasPage>},
       {path:'/login',element:<LoginPage></LoginPage>},
+      {path:'/register',element:<RegisterPage></RegisterPage>},
     ]
   },
 ]);
