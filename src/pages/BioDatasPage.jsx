@@ -25,8 +25,6 @@ export const BiodatasPage = () => {
     const val = Number(e.target.value);
     setAgeRange([18, val]);
   };
-
-  console.log(biodataType);
   
 
  useEffect(() => {

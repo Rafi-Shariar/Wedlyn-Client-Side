@@ -42,7 +42,7 @@ const Navbar2 = () => {
       <h1 className="hidden lg:inline text-4xl text-white">|</h1>
 
       <NavLink to={"/login"}>
-        <Button color="none" className="bg-secondary hover:bg-accent">
+        <Button color="none" className="bg-secondary text-white hover:bg-accent">
           Login
         </Button>
       </NavLink>

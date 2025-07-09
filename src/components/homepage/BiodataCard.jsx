@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "flowbite-react";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router";
 
 const BiodataCard = ({ biodata }) => {
   const {
@@ -61,12 +62,14 @@ const BiodataCard = ({ biodata }) => {
 
       {/* Button */}
       <div className="px-4 pb-4">
-        <Button
+        <Link to={`/biodatadetails/${biodataId}`}>
+        <button
           color="none"
           className="w-full bg-secondary hover:bg-accent hover:cursor-pointer text-white font-medium py-2 rounded-xl transition-all duration-300"
         >
           View Profile
-        </Button>
+        </button>
+        </Link>
       </div>
     </div>
   );

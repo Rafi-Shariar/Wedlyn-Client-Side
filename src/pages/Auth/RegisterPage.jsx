@@ -8,8 +8,7 @@ const errorToast = () => toast.error("Error Login! Try Again.");
 import axios from "axios";
 const LoginPage = () => {
   const { createUser } = use(AuthContext);
-  const { profileImage, setProfileImage } = useState("");
-  const location = useLocation();
+  const [ profileImage, setProfileImage ] = useState('');
   const navigate = useNavigate();
 
   // TODO: password validation

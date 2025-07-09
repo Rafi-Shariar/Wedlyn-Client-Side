@@ -12,7 +12,6 @@ export const Statistic = () => {
       .get(`${import.meta.env.VITE_URL}/stats`)
       .then((res) => {
         setCounts(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
