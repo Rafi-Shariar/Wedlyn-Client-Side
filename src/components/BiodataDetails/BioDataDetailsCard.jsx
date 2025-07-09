@@ -1,10 +1,18 @@
-import React, { use } from "react";
+import React from "react";
 import { Link } from "react-router";
 import { FaHeartCircleCheck } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSkeleton from "../shared/LoadingSkeleton";
 import BiodataCard from "../homepage/BiodataCard";
+import { FaHome } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
+import { BsPersonHeart } from "react-icons/bs";
+import { MdLocalPhone } from "react-icons/md";
+import toast, { Toaster } from "react-hot-toast";
+import { isBiodataInFavourites } from "../../assets/checkAddToFavourites";
+const successToast = () => toast.success("Added To Favourites");
+const errorToast = () => toast.error("Error Occured! Try Again.");
 const BioDataDetailsCard = ({ biodata, userInfo }) => {
   const {
     biodataId,
@@ -29,22 +37,41 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
     mobileNumber,
   } = biodata;
 
-  const {data: similarBiodatas = [], isLoading} = useQuery({
-    queryKey: ['similar-biodatas', biodataId, biodataType],
-    queryFn: async ()=>{
-      const res = await axios.get(`${import.meta.env.VITE_URL}/similar-biodatas?id=${biodataId}&gender=${biodataType}`);
+  const { data: similarBiodatas = [], isLoading } = useQuery({
+    queryKey: ["similar-biodatas", biodataId, biodataType],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${
+          import.meta.env.VITE_URL
+        }/similar-biodatas?id=${biodataId}&gender=${biodataType}`
+      );
 
       return res.data;
-    }
-  })
+    },
+  });
 
-  console.log(similarBiodatas);
-  
+  const handleAddToFavourite = () => {
+    const informations = {
+      userEmail: userInfo?.email,
+      biodata,
+    };
+
+    axios
+      .patch(`${import.meta.env.VITE_URL}/addtofavourites`, informations)
+      .then(() => {
+        successToast();
+      })
+      .catch(()=>{
+        errorToast();
+      });
+  };
+
+  const disabled = isBiodataInFavourites(userInfo?.favourites, biodata);
 
   return (
     <div>
       {/* PersonalInfo */}
-      <section className="flex justify-center items-center  bg-white px-4 py-10">
+      <section className="flex justify-center items-center bg-white px-4 py-10">
         <div className="flex flex-col md:flex-row max-w-3xl w-full rounded-2xl shadow-2xl overflow-hidden">
           {/* Profile Image */}
           <div className="md:w-1/2 w-full">
@@ -56,43 +83,55 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
           </div>
 
           {/* Biodata Details */}
-          <div className="md:w-1/2 w-full bg-gradient-to-br from-purple-100 via-purple-50 to-white p-6 space-y-3 flex flex-col justify-center">
-            <h2 className="text-4xl font-bold text-primary mb-1">{name}</h2>
-            <p>
-              <span className="font-semibold ">Biodata ID:</span> {biodataId}
-            </p>
-            <p>
-              <span className="font-semibold ">Age:</span> {age} years
-            </p>
-            <p>
-              <span className="font-semibold ">Weight:</span> {weight} kg
-            </p>
-            <p>
-              <span className="font-semibold ">Height:</span> {height} ft
-            </p>
-            <p>
-              <span className="font-semibold ">Gender:</span> {biodataType}
-            </p>
-            <p>
-              <span className="font-semibold ">Occupation:</span> {occupation}
-            </p>
-            <p>
-              <span className="font-semibold ">Date of Birth:</span>{" "}
-              {dateOfBirth}
-            </p>
-            {/* Skin Tone */}
-            <p className="flex items-center gap-2">
-              <span className="font-semibold">Skin Tone:</span>
-              <span
-                className="w-5 h-5 rounded-full border border-gray-300 shadow-sm"
-                style={{ backgroundColor: race }}
-                title={race}
-              ></span>
-            </p>
-            <button className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md">
-              <FaHeartCircleCheck className="text-lg" />
-              Add to Favourite
-            </button>{" "}
+          <div className="md:w-1/2 w-full bg-gradient-to-br from-purple-100 via-purple-50 to-white p-6 flex flex-col justify-around">
+            {/* Top Content */}
+            <div className="space-y-3">
+              <h2 className="text-4xl font-bold text-primary mb-1">{name}</h2>
+              <p>
+                <span className="font-semibold">Biodata ID:</span> {biodataId}
+              </p>
+              <p>
+                <span className="font-semibold">Age:</span> {age} years
+              </p>
+              <p>
+                <span className="font-semibold">Weight:</span> {weight} kg
+              </p>
+              <p>
+                <span className="font-semibold">Height:</span> {height} ft
+              </p>
+              <p>
+                <span className="font-semibold">Gender:</span> {biodataType}
+              </p>
+              <p>
+                <span className="font-semibold">Occupation:</span> {occupation}
+              </p>
+              <p>
+                <span className="font-semibold">Date of Birth:</span>{" "}
+                {dateOfBirth}
+              </p>
+
+              {/* Skin Tone */}
+              <p className="flex items-center gap-2">
+                <span className="font-semibold">Skin Tone:</span>
+                <span
+                  className="w-5 h-5 rounded-full border border-gray-300 shadow-sm"
+                  style={{ backgroundColor: race }}
+                  title={race}
+                ></span>
+              </p>
+            </div>
+
+            {/* Button at Bottom */}
+            <div className=" mt-4">
+              {
+                disabled? (<><button className="flex items-center justify-center gap-2 w-full bg-red-300 text-white font-semibold px-4 py-2 rounded-xl shadow-md" >
+                Already Added to Favourites
+              </button></>) : (<><button className="flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md" onClick={handleAddToFavourite}>
+                <FaHeartCircleCheck className="text-lg" />
+                Add to Favourite
+              </button></>)
+              }
+            </div>
           </div>
         </div>
       </section>
@@ -103,6 +142,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
           <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
+            <FaHome className="inline mr-2 mb-1" />
             Address
           </h3>
         </div>
@@ -126,7 +166,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
           <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
-            Parent's Info
+            <FaUserFriends className="inline mr-2 mb-1" /> Parent's Info
           </h3>
         </div>
 
@@ -149,6 +189,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
           <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
+            <BsPersonHeart className="inline mr-2 mb-1" />
             Expected Partner
           </h3>
         </div>
@@ -177,6 +218,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
               <div className="relative mb-4">
                 <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
                 <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
+                  <MdLocalPhone className="inline mr-2 mb-1" />
                   Contact Info
                 </h3>
               </div>
@@ -201,6 +243,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
               <div className="relative mb-4">
                 <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
                 <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
+                  <MdLocalPhone className="inline mr-2 mb-1" />
                   Contact Info
                 </h3>
               </div>
@@ -220,30 +263,34 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
 
       {/* Suggestions */}
       <section className="mt-10 bg-gray-50 p-7 rounded-3xl">
-        <h1 className="text-3xl font-semibold text-primary">Explore More Biodatas</h1>
+        <h1 className="text-3xl font-semibold text-primary">
+          Explore More Biodatas
+        </h1>
         <div>
-          {
-            isLoading?(<>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 mt-6">
-                  <LoadingSkeleton></LoadingSkeleton>
-                  <LoadingSkeleton></LoadingSkeleton>
-                  <LoadingSkeleton></LoadingSkeleton>
-
-                </div>
-            </>) : (<>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
-                  {
-                    similarBiodatas.map(biodata => <BiodataCard key={biodata._id} biodata={biodata}></BiodataCard>)
-                  }
-
-                </div>
-            
-            </>)
-          }
+          {isLoading ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 mt-6">
+                <LoadingSkeleton></LoadingSkeleton>
+                <LoadingSkeleton></LoadingSkeleton>
+                <LoadingSkeleton></LoadingSkeleton>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
+                {similarBiodatas.map((biodata) => (
+                  <BiodataCard
+                    key={biodata._id}
+                    biodata={biodata}
+                  ></BiodataCard>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
+       <Toaster position="top-right"
+        reverseOrder={false}/>
     </div>
   );
 };
