@@ -2,24 +2,19 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import LoadingCardsContainer from "./LoadingCardsContainer";
 import BiodataCard from "./BiodataCard";
+import { useQuery } from "@tanstack/react-query";
 
 const PremiumMembers = () => {
 
-    const [loading, setLoading] = useState(true);
-    const [biodatas, setBioDatas] = useState([]);
 
-    useEffect(()=>{
+    const { data: biodatas={}, isLoading} = useQuery({
+      queryKey:['premium-biodatas'],
+      queryFn: async ()=>{
+         const res = await axios.get(`${import.meta.env.VITE_URL}/biodatas?category=premium&limit=6`);
+         return res.data;
+      }
+    })
 
-        axios.get(`${import.meta.env.VITE_URL}/biodatas?category=premium&limit=6`)
-        .then((res)=>{
-            setBioDatas(res.data);
-            setLoading(false);
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
-
-    },[])
 
 
   return (
@@ -40,7 +35,7 @@ const PremiumMembers = () => {
       {/* Cards Container */}
       <div>
         {
-            loading? (<>
+            isLoading? (<>
              <LoadingCardsContainer></LoadingCardsContainer>
             </>):(<>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
