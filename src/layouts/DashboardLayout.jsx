@@ -11,9 +11,22 @@ import { IoHeartCircleOutline } from "react-icons/io5";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { BiLogOut } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
+import toast, { Toaster } from "react-hot-toast";
+const successToast = () => toast.success("Logout Successful");
+const errorToast = () => toast.error("Error logging out! Try Again.");
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { userInfo } = use(AuthContext);
+  const { userInfo,logOutUser } = use(AuthContext);
+
+    const handleLogout = () => {
+    logOutUser()
+      .then(() => {
+        successToast();
+      })
+      .catch(() => {
+        errorToast();
+      });
+  };
 
   const userlinks = (
     <>
@@ -22,19 +35,19 @@ const DashboardLayout = () => {
         <MdDashboard className="inline mr-2 mb-1" />
         Dashboard
       </NavLink>
-      <NavLink to={"/editbiodata"}>
+      <NavLink to={"/dashboard/editbiodata"}>
         <FaPenAlt className="inline mr-2 mb-1" />
         Edit Biodata
       </NavLink>
-      <NavLink to={"/viewbiodata"}>
+      <NavLink to={"/dashboard/viewbiodata"}>
         <CiViewList className="inline mr-2 mb-1" />
         View Biodata
       </NavLink>
-      <NavLink to={"/mycontactrequest"}>
+      <NavLink to={"/dashboard/mycontactrequest"}>
         <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
         My Contact Request
       </NavLink>
-      <NavLink to={"/favouritebiodata"}>
+      <NavLink to={"/dashboard/favouritebiodata"}>
         <IoHeartCircleOutline className="inline mr-2 mb-1" />
         Favourite Biodata
       </NavLink>
@@ -45,7 +58,7 @@ const DashboardLayout = () => {
           <FaArrowLeftLong className="inline mr-2 mb-1" />
           Back to Website
         </NavLink>
-        <button className="bg-red-500 rounded-2xl py-2 w-[130px] hover:bg-red-300">
+        <button className="bg-red-500 rounded-2xl py-2 w-[130px] hover:bg-red-300" onClick={handleLogout}>
           <BiLogOut className="inline mr-2 mb-1" />
           Logout
         </button>
@@ -60,15 +73,15 @@ const DashboardLayout = () => {
         <MdDashboard className="inline mr-2 mb-1" />
         Dashboard
       </NavLink>
-      <NavLink to={"/manageusers"}>
+      <NavLink to={"/dashboard/manageusers"}>
         <FaPenAlt className="inline mr-2 mb-1" />
         Manage Users
       </NavLink>
-      <NavLink to={"/approvedpremium"}>
+      <NavLink to={"/dashboard/approvedpremium"}>
         <CiViewList className="inline mr-2 mb-1" />
         Approved Premium
       </NavLink>
-      <NavLink to={"/approvedcontactrequest"}>
+      <NavLink to={"/dashboard/approvedcontactrequest"}>
         <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
         Approved Contact Request
       </NavLink>
@@ -79,7 +92,7 @@ const DashboardLayout = () => {
           <FaArrowLeftLong className="inline mr-2 mb-1" />
           Back to Website
         </NavLink>
-        <button className="text-start hover:cursor-pointer">
+        <button className="text-start hover:cursor-pointer" onClick={handleLogout}>
           <BiLogOut className="inline mr-2 mb-1" />
           Logout
         </button>
@@ -87,11 +100,13 @@ const DashboardLayout = () => {
     </>
   );
 
+
+
   return (
     <div>
       {userInfo ? (
         <>
-          <div className="flex min-h-screen bg-gray-50">
+          <div className="flex min-h-screen ">
             {/* Sidebar for desktop */}
             <aside className="hidden lg:block w-64 shadow-md p-4 bg-primary/90">
               <div className="flex items-center space-x-3">

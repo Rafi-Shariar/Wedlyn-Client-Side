@@ -12,6 +12,7 @@ import LottiLoading from "../components/shared/LottiLoading";
 import CheckoutPage from "../pages/CheckoutPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
+import ManageUsersPage from "../pages/Dashboard/Admin/ManageUsersPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
     element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children:[
       {index:true, element:<DashboardHome></DashboardHome>},
-      {}
+      {path:'manageusers', element:<ManageUsersPage></ManageUsersPage>}
 
     ]
   }
