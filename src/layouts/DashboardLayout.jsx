@@ -113,12 +113,12 @@ const DashboardLayout = () => {
           <div className="flex min-h-screen ">
             {/* Sidebar for desktop */}
             <aside className="hidden lg:block w-64 shadow-md p-4 bg-primary/90 sticky top-0 h-screen">
-              <div className="flex items-center space-x-3">
+              <Link to={'/'} className="flex items-center space-x-3">
                 <img src={logo} alt="Logo" className="h-10 w-auto" />
                 <span className="text-white text-2xl font-semibold">
                   Wedlyn
                 </span>
-              </div>
+              </Link>
               <nav className="space-y-4 mt-10 flex flex-col text-white">
                 {userInfo?.role == "admin" ? (
                   <>{adminlinks}</>

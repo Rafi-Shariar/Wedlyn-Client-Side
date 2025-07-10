@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { Button } from "flowbite-react";
 import { AuthContext } from "../../context/AuthContext";
@@ -81,10 +81,10 @@ const Navbar2 = () => {
     <div className="bg-primary sticky top-0 z-500">
       <div className="max-w-7xl mx-auto">
         <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex items-center space-x-3">
+          <Link to={'/'} className="flex items-center space-x-3">
             <img src={logo} alt="Logo" className="h-8 w-auto" />
             <span className="text-white text-2xl font-semibold">Wedlyn</span>
-          </div>
+          </Link>
 
           <div className="hidden lg:flex items-center gap-6 text-lg">
             {user ? loggedInLinks : links}
