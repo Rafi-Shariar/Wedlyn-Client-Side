@@ -9,7 +9,7 @@ const DashboardHome = () => {
 
     if(loading) return <LottiLoading/>;
 
-    if(userInfo?.role === 'admin') return <AdminDashboardHome/>;
+    if(userInfo &&  userInfo?.role === 'admin') return <AdminDashboardHome></AdminDashboardHome>;
 
     return <UserDashbaordHome/>
 };

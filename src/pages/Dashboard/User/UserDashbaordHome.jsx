@@ -3,7 +3,7 @@ import React from 'react';
 const UserDashbaordHome = () => {
     return (
         <div>
-            User
+            <h1>Welcome back </h1>
         </div>
     );
 };

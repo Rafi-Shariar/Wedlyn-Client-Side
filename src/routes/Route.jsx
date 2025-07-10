@@ -13,6 +13,9 @@ import CheckoutPage from "../pages/CheckoutPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import ManageUsersPage from "../pages/Dashboard/Admin/ManageUsersPage";
+import AdminRoutes from "../privateRoutes/AdminRoutes";
+import EditBiodataPage2 from "../pages/Dashboard/User/EditBiodataPage2";
+import CreateNewBiodataPage from "../pages/Dashboard/User/CreateNewBiodataPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,10 +36,12 @@ export const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    element:<DashboardLayout></DashboardLayout>,
     children:[
       {index:true, element:<DashboardHome></DashboardHome>},
-      {path:'manageusers', element:<ManageUsersPage></ManageUsersPage>}
+      {path:'manageusers', element:<AdminRoutes><ManageUsersPage></ManageUsersPage></AdminRoutes>},
+      {path:'editbiodata' , element:<EditBiodataPage2></EditBiodataPage2>},
+      {path:'editbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>}
 
     ]
   }

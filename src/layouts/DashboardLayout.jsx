@@ -1,6 +1,6 @@
 import React, { use, useState } from "react";
 import { BsLayoutSidebar, BsX } from "react-icons/bs";
-import { Link, NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet, useNavigate } from "react-router";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
 import LottiLoading from "../components/shared/LottiLoading";
@@ -16,17 +16,21 @@ const successToast = () => toast.success("Logout Successful");
 const errorToast = () => toast.error("Error logging out! Try Again.");
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { userInfo,logOutUser } = use(AuthContext);
+  const { userInfo,logOutUser, loading } = use(AuthContext);
+  const navigate = useNavigate();
 
     const handleLogout = () => {
     logOutUser()
       .then(() => {
         successToast();
+        navigate('/');
       })
       .catch(() => {
         errorToast();
       });
   };
+
+  if(loading) return <LottiLoading/>
 
   const userlinks = (
     <>
@@ -58,7 +62,7 @@ const DashboardLayout = () => {
           <FaArrowLeftLong className="inline mr-2 mb-1" />
           Back to Website
         </NavLink>
-        <button className="bg-red-500 rounded-2xl py-2 w-[130px] hover:bg-red-300" onClick={handleLogout}>
+        <button className="text-start hover:cursor-pointer" onClick={handleLogout}>
           <BiLogOut className="inline mr-2 mb-1" />
           Logout
         </button>
@@ -108,7 +112,7 @@ const DashboardLayout = () => {
         <>
           <div className="flex min-h-screen ">
             {/* Sidebar for desktop */}
-            <aside className="hidden lg:block w-64 shadow-md p-4 bg-primary/90">
+            <aside className="hidden lg:block w-64 shadow-md p-4 bg-primary/90 sticky top-0 h-screen">
               <div className="flex items-center space-x-3">
                 <img src={logo} alt="Logo" className="h-10 w-auto" />
                 <span className="text-white text-2xl font-semibold">
@@ -173,7 +177,7 @@ const DashboardLayout = () => {
 
                 <div className="flex items-center gap-4">
                   <img
-                    src={userInfo?.photourl} // Replace with actual user photo URL
+                    src={userInfo?.photourl}
                     alt="User"
                     className="w-12 h-12 rounded-full object-cover border-2 border-primary"
                   />
