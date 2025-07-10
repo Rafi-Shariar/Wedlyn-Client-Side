@@ -18,6 +18,8 @@ import EditBiodataPage2 from "../pages/Dashboard/User/EditBiodataPage2";
 import CreateNewBiodataPage from "../pages/Dashboard/User/CreateNewBiodataPage";
 import ViewBiodataPage from "../pages/Dashboard/User/ViewBiodataPage";
 import CreateBiodata from "../components/EditBiodata/CreateBiodata";
+import MyContactRequestPage from "../pages/Dashboard/User/MyContactRequestPage";
+import MyFavouriteBiodataPage from "../pages/Dashboard/User/MyFavouriteBiodataPage";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +47,9 @@ export const router = createBrowserRouter([
       {path:'editbiodata' , element:<EditBiodataPage2></EditBiodataPage2>},
       {path:'editbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>},
       {path:'viewbiodata', element:<ViewBiodataPage></ViewBiodataPage>},
-      {path:'viewbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>}
+      {path:'viewbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>},
+      {path:'mycontactrequest', element:<MyContactRequestPage></MyContactRequestPage>},
+      {path:'favouritebiodata', element:<MyFavouriteBiodataPage></MyFavouriteBiodataPage>},
 
     ]
   }
