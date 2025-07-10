@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { FaHeartCircleCheck } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
@@ -50,6 +50,8 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
     },
   });
 
+    const [updateFav, setUpdateFav] = useState('false')
+
   const handleAddToFavourite = () => {
     const informations = {
       userEmail: userInfo?.email,
@@ -60,6 +62,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       .patch(`${import.meta.env.VITE_URL}/addtofavourites`, informations)
       .then(() => {
         successToast();
+        setUpdateFav(true);
       })
       .catch(()=>{
         errorToast();
@@ -67,6 +70,9 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
   };
 
   const disabled = isBiodataInFavourites(userInfo?.favourites, biodata);
+
+
+
 
   return (
     <div>
@@ -126,7 +132,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
               {
                 disabled? (<><button className="flex items-center justify-center gap-2 w-full bg-red-300 text-white font-semibold px-4 py-2 rounded-xl shadow-md" >
                 Already Added to Favourites
-              </button></>) : (<><button className="flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md" onClick={handleAddToFavourite}>
+              </button></>) : (<><button  className={`flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md `} onClick={handleAddToFavourite}>
                 <FaHeartCircleCheck className="text-lg" />
                 Add to Favourite
               </button></>)
