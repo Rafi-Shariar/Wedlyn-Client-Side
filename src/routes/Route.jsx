@@ -16,6 +16,8 @@ import ManageUsersPage from "../pages/Dashboard/Admin/ManageUsersPage";
 import AdminRoutes from "../privateRoutes/AdminRoutes";
 import EditBiodataPage2 from "../pages/Dashboard/User/EditBiodataPage2";
 import CreateNewBiodataPage from "../pages/Dashboard/User/CreateNewBiodataPage";
+import ViewBiodataPage from "../pages/Dashboard/User/ViewBiodataPage";
+import CreateBiodata from "../components/EditBiodata/CreateBiodata";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +43,9 @@ export const router = createBrowserRouter([
       {index:true, element:<DashboardHome></DashboardHome>},
       {path:'manageusers', element:<AdminRoutes><ManageUsersPage></ManageUsersPage></AdminRoutes>},
       {path:'editbiodata' , element:<EditBiodataPage2></EditBiodataPage2>},
-      {path:'editbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>}
+      {path:'editbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>},
+      {path:'viewbiodata', element:<ViewBiodataPage></ViewBiodataPage>},
+      {path:'viewbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>}
 
     ]
   }
