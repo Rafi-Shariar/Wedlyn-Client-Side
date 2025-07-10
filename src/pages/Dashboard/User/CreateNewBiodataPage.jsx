@@ -12,14 +12,73 @@ import {
   FaMapMarkerAlt,
   FaHeart,
 } from "react-icons/fa";
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+const successToast = () => toast.success('Biodata Created Successfully.');
+const errorToast = () => toast.error('Error occured! Try Again.');
 const CreateNewBiodataPage = () => {
   const { userInfo } = useContext(AuthContext);
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    alert(`Hello, ${data.name}! Your email is ${data.email}.`);
+
+  const onSubmit = async (data) => {
+
+//     let imageURL = "https://i.ibb.co/2kzFJX2/default-avatar.jpg";
+
+
+//      const image = data.profileImage[0];
+//     const formData = new FormData();
+//     formData.append("image", image);
+
+//     const res = await axios.post(
+//       `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMBB_KEY}`,
+//       formData
+//     );
+
+//    if (res.data && res.data.data && res.data.data.url) {
+//       imageURL = res.data.data.url;
+//     }
+    
+
+    const formattedData = {
+    biodataType: data.biodataType,
+    category: "regular",
+    name: data.name,
+    profileImage: "https://i.ibb.co/2kzFJX2/default-avatar.jpg",
+
+    dateOfBirth: data.dateOfBirth,
+    height: parseFloat(data.height),
+    weight: parseInt(data.weight),
+    age: parseInt(data.age),
+    occupation: data.occupation,
+    race: data.race,
+
+    fathersName: data.fathersName,
+    mothersName: data.mothersName,
+    permanentDivision: data.permanentDivision,
+    presentDivision: data.presentDivision,
+
+    expectedPartnerAge: parseInt(data.expectedPartnerAge),
+    expectedPartnerHeight: parseFloat(data.expectedPartnerHeight),
+    expectedPartnerWeight: parseInt(data.expectedPartnerWeight),
+
+    contactEmail: data.contactEmail,
+    mobileNumber: data.mobileNumber,
+  };
+
+  console.log(formattedData);
+  
+
+    axios.post(`${import.meta.env.VITE_URL}/createbiodata`,formattedData)
+    .then(()=>{
+        successToast();
+       
+    })
+    .catch(()=>{
+        errorToast();
+    })
+    
   };
 
   if (!userInfo) return <LottiLoading />;
@@ -111,7 +170,8 @@ const CreateNewBiodataPage = () => {
           <label className="block font-semibold mb-1">Age</label>
           <input
             type="number"
-            {...register("age", { required: true })}
+            step="0.1"
+            {...register("age", { required: true, valueAsNumber:true })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -202,7 +262,7 @@ const CreateNewBiodataPage = () => {
           </label>
           <input
             type="number"
-            {...register("expectedPartnerAge", { required: true })}
+            {...register("expectedPartnerAge", { required: true ,valueAsNumber:true })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -214,7 +274,8 @@ const CreateNewBiodataPage = () => {
           </label>
           <input
             type="number"
-            {...register("expectedPartnerHeight", { required: true })}
+            step='0.1'
+            {...register("expectedPartnerHeight", { required: true,valueAsNumber:true  })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -226,7 +287,8 @@ const CreateNewBiodataPage = () => {
           </label>
           <input
             type="number"
-            {...register("expectedPartnerWeight", { required: true })}
+            step='0.1'
+            {...register("expectedPartnerWeight", { required: true ,valueAsNumber:true })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -258,12 +320,14 @@ const CreateNewBiodataPage = () => {
         <div className="md:col-span-2">
           <button
             type="submit"
-            className="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition"
+            className="w-full bg-primary text-white py-3 rounded-xl  hover:bg-primary/50 transition"
           >
-            Submit Biodata
+            Submit and Publish Biodata
           </button>
         </div>
       </form>
+      <Toaster position="top-right"
+        reverseOrder={false}/>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BiodataCard from "../components/homepage/BiodataCard";
 import LoadingSkeleton from "../components/shared/LoadingSkeleton";
+import { fetchFilteredBiodatas } from "../utils/fetchFilteredBiodatas";
+import toast from "react-hot-toast";
 
 const divisions = [
   "Dhaka",
@@ -14,36 +16,30 @@ const divisions = [
 ];
 
 export const BiodatasPage = () => {
-  const [ageRange, setAgeRange] = useState([18, 40]);
+  const [ageRange, setAgeRange] = useState([18, 50]);
   const [biodataType, setBiodataType] = useState("");
   const [division, setDivision] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [biodates,setBiodatas] = useState([]);
+  const [biodatas,setBiodatas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleAgeChange = (e) => {
     const val = Number(e.target.value);
-    setAgeRange([18, val]);
+    setAgeRange([10, val]);
   };
   
 
  useEffect(() => {
-  const queryParams = new URLSearchParams();
-
-  if (biodataType) queryParams.append("biodataType", biodataType);
-  if (division) queryParams.append("division", division);
-  if (ageRange.length === 2) {
-    queryParams.append("ageRange", `${ageRange[0]}-${ageRange[1]}`);
-  }
-
-  axios
-    .get(`${import.meta.env.VITE_URL}/biodatas?${queryParams}`)
-    .then((res) => {
-      setBiodatas(res.data);
-      setLoading(false);
+  setLoading(true);
+  fetchFilteredBiodatas({ ageRange, biodataType, division })
+    .then((data) => {
+      setBiodatas(data);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
+      toast.error("Failed to load biodatas");
+    })
+    .finally(() => {
+      setLoading(false);
     });
 }, [ageRange, biodataType, division]);
 
@@ -215,7 +211,7 @@ export const BiodatasPage = () => {
 
       {/* Biodata List */}
       <main className="flex-1">
-        <h2 className="text-2xl font-semibold mb-6">Available Biodatas</h2>
+        <h2 className="text-2xl font-semibold mb-6">Available Biodatas ( {biodatas.length} )</h2>
         {
             loading?(<>
             
@@ -228,10 +224,11 @@ export const BiodatasPage = () => {
 
             </div>
             </>):(<>
+
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
          {
-            biodates.map(biodata => <BiodataCard key={biodata._id} biodata={biodata}></BiodataCard>)
+            biodatas.map(biodata => <BiodataCard key={biodata._id} biodata={biodata}></BiodataCard>)
          }
         </div>
             </>)
