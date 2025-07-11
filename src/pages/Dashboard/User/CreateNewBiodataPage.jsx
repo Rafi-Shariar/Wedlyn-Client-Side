@@ -24,28 +24,26 @@ const CreateNewBiodataPage = () => {
 
   const onSubmit = async (data) => {
 
-//     let imageURL = "https://i.ibb.co/2kzFJX2/default-avatar.jpg";
 
 
-//      const image = data.profileImage[0];
-//     const formData = new FormData();
-//     formData.append("image", image);
+     const image = data.profileImage[0];
+    const formData = new FormData();
+    formData.append("image", image);
 
-//     const res = await axios.post(
-//       `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMBB_KEY}`,
-//       formData
-//     );
+    const res = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMBB_KEY}`,
+      formData
+    );
 
-//    if (res.data && res.data.data && res.data.data.url) {
-//       imageURL = res.data.data.url;
-//     }
+  
+    const imageURL = res.data.data.url;
     
 
     const formattedData = {
     biodataType: data.biodataType,
     category: "regular",
     name: data.name,
-    profileImage: "https://i.ibb.co/2kzFJX2/default-avatar.jpg",
+    profileImage: imageURL,
 
     dateOfBirth: data.dateOfBirth,
     height: parseFloat(data.height),

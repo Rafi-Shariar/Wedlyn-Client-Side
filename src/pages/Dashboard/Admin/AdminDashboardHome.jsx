@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import DashboardBiodataStats from "../../../components/Dashboards/DashboardBiodataStats";
 
 const AdminDashboardHome = () => {
   const { data: stats = {} } = useQuery({
@@ -19,6 +20,8 @@ const AdminDashboardHome = () => {
           Plan, prioritize, and accomplish your task with ease.
         </p>
       </div>
+
+     
 
       {/* Stats Section */}
       <section className="max-w-5xl mt-6 bg-slate-200 p-5 rounded-2xl">
@@ -48,7 +51,7 @@ const AdminDashboardHome = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-6">
           <div className="border rounded-2xl p-4 bg-slate-50  border-secondary">
             <p className="text-xl">Female Biodatas</p>
             <p className="text-3xl mt-3 font-semibold">
@@ -65,6 +68,15 @@ const AdminDashboardHome = () => {
             <p className="text-xm mt-2 text-primary">Available premium biodatas</p>
           </div>
         </div>
+
+        <div>
+          
+        </div>
+      </section>
+
+      <section className="max-w-5xl mt-10">
+        <DashboardBiodataStats stats={stats}></DashboardBiodataStats>
+
       </section>
     </div>
   );

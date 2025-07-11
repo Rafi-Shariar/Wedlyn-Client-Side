@@ -20,6 +20,8 @@ import ViewBiodataPage from "../pages/Dashboard/User/ViewBiodataPage";
 import CreateBiodata from "../components/EditBiodata/CreateBiodata";
 import MyContactRequestPage from "../pages/Dashboard/User/MyContactRequestPage";
 import MyFavouriteBiodataPage from "../pages/Dashboard/User/MyFavouriteBiodataPage";
+import MakePremiumPage from "../pages/Dashboard/Admin/MakePremiumPage";
+import SuccessStoriesPage from "../pages/Dashboard/Admin/SuccessStoriesPage";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +52,8 @@ export const router = createBrowserRouter([
       {path:'viewbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>},
       {path:'mycontactrequest', element:<MyContactRequestPage></MyContactRequestPage>},
       {path:'favouritebiodata', element:<MyFavouriteBiodataPage></MyFavouriteBiodataPage>},
+      {path:'approvedpremium', element:<MakePremiumPage></MakePremiumPage>},
+      {path:'successstories', element:<SuccessStoriesPage></SuccessStoriesPage>}
 
     ]
   }

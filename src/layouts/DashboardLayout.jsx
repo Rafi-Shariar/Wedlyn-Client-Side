@@ -89,6 +89,10 @@ const DashboardLayout = () => {
         <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
         Approved Contact Request
       </NavLink>
+       <NavLink to={"/dashboard/successstories"}>
+        <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
+        Success Stories
+      </NavLink>
 
       <div className="flex flex-col gap-3 mt-20">
         <h1 className="text-gray-400">General</h1>

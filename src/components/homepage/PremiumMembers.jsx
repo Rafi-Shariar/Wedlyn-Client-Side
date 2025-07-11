@@ -40,7 +40,7 @@ const PremiumMembers = () => {
             </>):(<>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {
-                        biodatas.map(biodata => <BiodataCard key={biodata._id} biodata={biodata}></BiodataCard>)
+                        biodatas?.map(biodata => <BiodataCard key={biodata._id} biodata={biodata}></BiodataCard>)
                     }
 
                 </div>
