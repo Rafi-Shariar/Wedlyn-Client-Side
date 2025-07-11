@@ -22,6 +22,7 @@ import MyContactRequestPage from "../pages/Dashboard/User/MyContactRequestPage";
 import MyFavouriteBiodataPage from "../pages/Dashboard/User/MyFavouriteBiodataPage";
 import MakePremiumPage from "../pages/Dashboard/Admin/MakePremiumPage";
 import SuccessStoriesPage from "../pages/Dashboard/Admin/SuccessStoriesPage";
+import GotMarriedPage from "../pages/Dashboard/User/GotMarriedPage";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +54,8 @@ export const router = createBrowserRouter([
       {path:'mycontactrequest', element:<MyContactRequestPage></MyContactRequestPage>},
       {path:'favouritebiodata', element:<MyFavouriteBiodataPage></MyFavouriteBiodataPage>},
       {path:'approvedpremium', element:<MakePremiumPage></MakePremiumPage>},
-      {path:'successstories', element:<SuccessStoriesPage></SuccessStoriesPage>}
+      {path:'successstories', element:<SuccessStoriesPage></SuccessStoriesPage>},
+      {path:'gotmarried', element:<GotMarriedPage></GotMarriedPage>},
 
     ]
   }

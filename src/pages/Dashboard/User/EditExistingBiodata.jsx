@@ -1,14 +1,17 @@
+import React, { useState } from "react";
 import axios from "axios";
-import React from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import LottiLoading from "../../../components/shared/LottiLoading";
+
 const successToast = () => toast.success("Biodata Updated");
 const errorToast = () => toast.error("Error updating! Try Again.");
-const EditExistingBiodata = ({ biodata,setUpdated}) => {
+
+const EditExistingBiodata = ({ biodata, setUpdated }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -22,23 +25,49 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
     },
   });
 
-  const onSubmit = (data) => {
+  const [previewUrl, setPreviewUrl] = useState(biodata.profileImage);
+  const [uploading, setUploading] = useState(false);
 
-    console.log(data);
-    
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    axios.put(`${import.meta.env.VITE_URL}/biodata/${biodata?.biodataId}`, data)
-    .then(()=>{
-        successToast()
-        setUpdated(true);
-    })
-    .catch(()=>{
-        errorToast();
-    })
+    const preview = URL.createObjectURL(file);
+    setPreviewUrl(preview);
 
+    const formData = new FormData();
+    formData.append("image", file);
+
+    setUploading(true);
+    try {
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMBB_KEY}`,
+        formData
+      );
+      const uploadedUrl = res.data.data.url;
+      setValue("profileImage", uploadedUrl);
+      toast.success("Image uploaded");
+    } catch (err) {
+      console.error("Upload failed", err);
+      toast.error("Image upload failed");
+    } finally {
+      setUploading(false);
+    }
   };
 
-  if(!biodata) return <LottiLoading/>
+  const onSubmit = (data) => {
+    axios
+      .put(`${import.meta.env.VITE_URL}/biodata/${biodata?.biodataId}`, data)
+      .then(() => {
+        successToast();
+        setUpdated(true);
+      })
+      .catch(() => {
+        errorToast();
+      });
+  };
+
+  if (!biodata) return <LottiLoading />;
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-xl">
@@ -48,13 +77,34 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
+        {/* Preview Image */}
+        <div className="md:col-span-2 flex items-center gap-4">
+          <img
+            src={previewUrl}
+            alt="Preview"
+            className="w-24 h-24 object-cover rounded-full border"
+          />
+          {uploading && <p className="text-yellow-600">Uploading...</p>}
+        </div>
+
+        {/* Upload */}
+        <div>
+          <label className="block font-semibold mb-1">Change Photo</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="border border-slate-300 p-2 rounded-lg w-full"
+          />
+        </div>
+
         {/* Name */}
         <div>
           <label className="font-medium mb-1 block">Name</label>
           <input
             type="text"
             {...register("name", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -64,7 +114,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="date"
             {...register("dateOfBirth", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -75,7 +125,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
             type="number"
             step="0.1"
             {...register("height", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -85,7 +135,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="number"
             {...register("weight", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -95,7 +145,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="number"
             {...register("age", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -105,7 +155,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="text"
             {...register("occupation", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -125,7 +175,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="text"
             {...register("fathersName", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -135,7 +185,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="text"
             {...register("mothersName", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -144,13 +194,11 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <label className="font-medium mb-1 block">Permanent Division</label>
           <select
             {...register("permanentDivision", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           >
             <option value="">Select</option>
             {["Dhaka", "Chattogram", "Rangpur", "Barisal", "Khulna", "Mymensingh", "Sylhet"].map((div) => (
-              <option key={div} value={div}>
-                {div}
-              </option>
+              <option key={div} value={div}>{div}</option>
             ))}
           </select>
         </div>
@@ -160,13 +208,11 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <label className="font-medium mb-1 block">Present Division</label>
           <select
             {...register("presentDivision", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           >
             <option value="">Select</option>
             {["Dhaka", "Chattogram", "Rangpur", "Barisal", "Khulna", "Mymensingh", "Sylhet"].map((div) => (
-              <option key={div} value={div}>
-                {div}
-              </option>
+              <option key={div} value={div}>{div}</option>
             ))}
           </select>
         </div>
@@ -177,7 +223,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="number"
             {...register("expectedPartnerAge", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -188,7 +234,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
             type="number"
             step="0.1"
             {...register("expectedPartnerHeight", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -198,7 +244,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="number"
             {...register("expectedPartnerWeight", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -209,7 +255,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
             type="email"
             value={biodata.contactEmail}
             readOnly
-            className="input-style w-full border p-2 rounded-lg text-slate-500 bg-gray-100 cursor-not-allowed"
+            className="w-full border p-2 rounded-lg text-slate-500 bg-gray-100 cursor-not-allowed"
           />
         </div>
 
@@ -219,7 +265,7 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <input
             type="tel"
             {...register("mobileNumber", { required: true })}
-            className="input-style w-full border p-2 rounded-lg"
+            className="w-full border p-2 rounded-lg"
           />
         </div>
 
@@ -228,8 +274,9 @@ const EditExistingBiodata = ({ biodata,setUpdated}) => {
           <button
             type="submit"
             className="bg-primary text-white px-6 py-3 rounded-lg shadow hover:bg-primary/90 transition"
+            disabled={uploading}
           >
-            Save Changes
+            {uploading ? "Uploading..." : "Save Changes"}
           </button>
         </div>
       </form>

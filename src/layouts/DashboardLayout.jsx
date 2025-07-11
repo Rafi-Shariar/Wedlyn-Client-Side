@@ -11,6 +11,8 @@ import { IoHeartCircleOutline } from "react-icons/io5";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { BiLogOut } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
+import { FaUserFriends } from "react-icons/fa";
+
 import toast, { Toaster } from "react-hot-toast";
 const successToast = () => toast.success("Logout Successful");
 const errorToast = () => toast.error("Error logging out! Try Again.");
@@ -35,7 +37,7 @@ const DashboardLayout = () => {
   const userlinks = (
     <>
       <h1 className="text-gray-400">Menu</h1>
-      <NavLink to={"/dashboard"}>
+      <NavLink to={"/dashboard"} >
         <MdDashboard className="inline mr-2 mb-1" />
         Dashboard
       </NavLink>
@@ -54,6 +56,10 @@ const DashboardLayout = () => {
       <NavLink to={"/dashboard/favouritebiodata"}>
         <IoHeartCircleOutline className="inline mr-2 mb-1" />
         Favourite Biodata
+      </NavLink>
+       <NavLink to={"/dashboard/gotmarried"}>
+        <FaUserFriends className="inline mr-2 mb-1" />
+        Got Married
       </NavLink>
 
       <div className="flex flex-col gap-3 mt-20">
