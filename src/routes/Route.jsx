@@ -17,7 +17,6 @@ import AdminRoutes from "../privateRoutes/AdminRoutes";
 import EditBiodataPage2 from "../pages/Dashboard/User/EditBiodataPage2";
 import CreateNewBiodataPage from "../pages/Dashboard/User/CreateNewBiodataPage";
 import ViewBiodataPage from "../pages/Dashboard/User/ViewBiodataPage";
-import CreateBiodata from "../components/EditBiodata/CreateBiodata";
 import MyContactRequestPage from "../pages/Dashboard/User/MyContactRequestPage";
 import MyFavouriteBiodataPage from "../pages/Dashboard/User/MyFavouriteBiodataPage";
 import MakePremiumPage from "../pages/Dashboard/Admin/MakePremiumPage";
@@ -38,7 +37,8 @@ export const router = createBrowserRouter([
       {path:'/register',element:<RegisterPage></RegisterPage>},
       {path:'/test',element:<LottiLoading></LottiLoading>},
       {path:'/biodatadetails/:id',element:<PrivateRoute><BiodataDetailsPage></BiodataDetailsPage></PrivateRoute>},
-      {path:'/checkout',element:<PrivateRoute> <CheckoutPage></CheckoutPage> </PrivateRoute>},
+      {path:'/checkout/:id',element: <CheckoutPage></CheckoutPage>},
+
     ]
   },
   {

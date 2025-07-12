@@ -256,7 +256,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
 
               <div className="text-center">
                 <Link
-                  to={`/checkout`}
+                  to={`/checkout/${biodata?.biodataId}`}
                   className="bg-yellow-300 p-3 px-6 border rounded-3xl font-semibold hover:border-yellow-300 hover:bg-white hover:text-yellow-400"
                 >
                   Request Contact Information
