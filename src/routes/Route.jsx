@@ -22,6 +22,7 @@ import MyFavouriteBiodataPage from "../pages/Dashboard/User/MyFavouriteBiodataPa
 import MakePremiumPage from "../pages/Dashboard/Admin/MakePremiumPage";
 import SuccessStoriesPage from "../pages/Dashboard/Admin/SuccessStoriesPage";
 import GotMarriedPage from "../pages/Dashboard/User/GotMarriedPage";
+import PaymentSuccess from "../components/Payment/PaymentSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
       {path:'/test',element:<LottiLoading></LottiLoading>},
       {path:'/biodatadetails/:id',element:<PrivateRoute><BiodataDetailsPage></BiodataDetailsPage></PrivateRoute>},
       {path:'/checkout/:id',element: <CheckoutPage></CheckoutPage>},
+      {path:'/paymentsuccess',element: <PaymentSuccess></PaymentSuccess>},
 
     ]
   },

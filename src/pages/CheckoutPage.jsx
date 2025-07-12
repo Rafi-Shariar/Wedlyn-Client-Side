@@ -25,7 +25,6 @@ const CheckoutPage = () => {
 
   if(isLoading) return <LottiLoading/>
 
-  console.log(biodata);
   
 
   
@@ -55,7 +54,7 @@ const CheckoutPage = () => {
       <div className="max-w-2xl mx-auto border p-10 bg-sky-100 border-blue-400 rounded-2xl">
         <h1 className="text-lg  mb-3 font-medium">Enter Your Card Details...</h1>
         <Elements stripe={stripePromise}>
-        <CheckOutForm></CheckOutForm>
+        <CheckOutForm biodata={biodata} userInfo={userInfo}></CheckOutForm>
       </Elements>
       </div>
     </div>

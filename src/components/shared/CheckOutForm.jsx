@@ -1,10 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
-const CheckOutForm = () => {
+const CheckOutForm = ({userInfo,biodata}) => {
+  
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const [error, setError] = useState(" ");
 
@@ -21,7 +24,7 @@ const CheckOutForm = () => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -56,7 +59,29 @@ const CheckOutForm = () => {
         console.log("Result -> ", result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          console.log("payment successful");
+
+          const requestContact = {
+            requestedContactID :biodata?.biodataId,
+            requestedContactName : biodata?.name,
+            requestedBy : userInfo.email,
+            status: 'pending'
+
+
+          }
+          
+          axios.post(`${import.meta.env.VITE_URL}/requestcontactdetails`,requestContact)
+          .then(() =>{
+                axios.patch(`${import.meta.env.VITE_URL}/updaterevenue`,{amount: 5})
+                .then(()=>{
+                    navigate('/paymentsuccess')
+
+                })
+                  
+          })
+          .catch(()=>{
+
+          })
+
         }
       }
     }
