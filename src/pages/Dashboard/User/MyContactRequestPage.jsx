@@ -84,10 +84,11 @@ const MyContactRequestPage = () => {
                   </span>
                 </TableCell>
                 <TableCell>
-                  {info.status === "Approved" ? info.mobile : "---"}
+                  <p className="text-black">                  {info.status === "Approved" ? info.mobile : "---"}
+</p>
                 </TableCell>
                 <TableCell>
-                  {info.status === "Approved" ? info.email : "---"}
+                  <p className="text-black">{info.status === "Approved" ? info.email : "---"}</p>
                 </TableCell>
                 <TableCell>
                   <button

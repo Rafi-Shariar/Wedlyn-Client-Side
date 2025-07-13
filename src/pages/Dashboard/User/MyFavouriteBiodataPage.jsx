@@ -41,7 +41,7 @@ const MyFavouriteBiodataPage = () => {
       <h2 className="text-2xl font-bold text-primary mb-6">My Favourite Biodatas</h2>
 
       {favourites.length === 0 ? (
-        <p className="text-center text-gray-500">You have no favourite biodatas.</p>
+        <p className="text-center text-white-500">You have no favourite biodatas.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">

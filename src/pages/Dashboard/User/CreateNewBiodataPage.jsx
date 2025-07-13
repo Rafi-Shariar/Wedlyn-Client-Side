@@ -13,20 +13,18 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
-const successToast = () => toast.success('Biodata Created Successfully.');
-const errorToast = () => toast.error('Error occured! Try Again.');
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router";
+const successToast = () => toast.success("Biodata Created Successfully.");
+const errorToast = () => toast.error("Error occured! Try Again.");
 const CreateNewBiodataPage = () => {
   const { userInfo } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
 
-
   const onSubmit = async (data) => {
-
-
-
-     const image = data.profileImage[0];
+    const image = data.profileImage[0];
     const formData = new FormData();
     formData.append("image", image);
 
@@ -35,48 +33,44 @@ const CreateNewBiodataPage = () => {
       formData
     );
 
-  
     const imageURL = res.data.data.url;
-    
 
     const formattedData = {
-    biodataType: data.biodataType,
-    category: "regular",
-    name: data.name,
-    profileImage: imageURL,
+      biodataType: data.biodataType,
+      category: "regular",
+      name: data.name,
+      profileImage: imageURL,
 
-    dateOfBirth: data.dateOfBirth,
-    height: parseFloat(data.height),
-    weight: parseInt(data.weight),
-    age: parseInt(data.age),
-    occupation: data.occupation,
-    race: data.race,
+      dateOfBirth: data.dateOfBirth,
+      height: parseFloat(data.height),
+      weight: parseInt(data.weight),
+      age: parseInt(data.age),
+      occupation: data.occupation,
+      race: data.race,
 
-    fathersName: data.fathersName,
-    mothersName: data.mothersName,
-    permanentDivision: data.permanentDivision,
-    presentDivision: data.presentDivision,
+      fathersName: data.fathersName,
+      mothersName: data.mothersName,
+      permanentDivision: data.permanentDivision,
+      presentDivision: data.presentDivision,
 
-    expectedPartnerAge: parseInt(data.expectedPartnerAge),
-    expectedPartnerHeight: parseFloat(data.expectedPartnerHeight),
-    expectedPartnerWeight: parseInt(data.expectedPartnerWeight),
+      expectedPartnerAge: parseInt(data.expectedPartnerAge),
+      expectedPartnerHeight: parseFloat(data.expectedPartnerHeight),
+      expectedPartnerWeight: parseInt(data.expectedPartnerWeight),
 
-    contactEmail: data.contactEmail,
-    mobileNumber: data.mobileNumber,
-  };
+      contactEmail: data.contactEmail,
+      mobileNumber: data.mobileNumber,
+    };
 
-  console.log(formattedData);
-  
 
-    axios.post(`${import.meta.env.VITE_URL}/createbiodata`,formattedData)
-    .then(()=>{
+    axios
+      .post(`${import.meta.env.VITE_URL}/createbiodata`, formattedData)
+      .then(() => {
         successToast();
-       
-    })
-    .catch(()=>{
+        navigate('/dashboard');
+      })
+      .catch(() => {
         errorToast();
-    })
-    
+      });
   };
 
   if (!userInfo) return <LottiLoading />;
@@ -169,7 +163,7 @@ const CreateNewBiodataPage = () => {
           <input
             type="number"
             step="0.1"
-            {...register("age", { required: true, valueAsNumber:true })}
+            {...register("age", { required: true, valueAsNumber: true })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -187,7 +181,7 @@ const CreateNewBiodataPage = () => {
         {/* Skin Tone (Color Picker) */}
         <div>
           <label className="block font-semibold mb-1">Skin Tone</label>
-          <div className="rounded-xl overflow-hidden w-12 h-12 border">
+          <div className="h-10 w-10">
             <input
               type="color"
               {...register("race", { required: true })}
@@ -260,7 +254,10 @@ const CreateNewBiodataPage = () => {
           </label>
           <input
             type="number"
-            {...register("expectedPartnerAge", { required: true ,valueAsNumber:true })}
+            {...register("expectedPartnerAge", {
+              required: true,
+              valueAsNumber: true,
+            })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -272,8 +269,11 @@ const CreateNewBiodataPage = () => {
           </label>
           <input
             type="number"
-            step='0.1'
-            {...register("expectedPartnerHeight", { required: true,valueAsNumber:true  })}
+            step="0.1"
+            {...register("expectedPartnerHeight", {
+              required: true,
+              valueAsNumber: true,
+            })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -285,8 +285,11 @@ const CreateNewBiodataPage = () => {
           </label>
           <input
             type="number"
-            step='0.1'
-            {...register("expectedPartnerWeight", { required: true ,valueAsNumber:true })}
+            step="0.1"
+            {...register("expectedPartnerWeight", {
+              required: true,
+              valueAsNumber: true,
+            })}
             className="border border-slate-300 p-2 rounded-lg w-full"
           />
         </div>
@@ -324,8 +327,7 @@ const CreateNewBiodataPage = () => {
           </button>
         </div>
       </form>
-      <Toaster position="top-right"
-        reverseOrder={false}/>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
