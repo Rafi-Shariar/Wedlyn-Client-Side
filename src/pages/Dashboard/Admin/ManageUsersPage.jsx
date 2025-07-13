@@ -48,7 +48,7 @@ const ManageUsersPage = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axios
-            .patch(`${import.meta.env.VITE_URL}/updateuserrole`, {
+            .patch(`${import.meta.env.VITE_URL}/updateusercategory`, {
               userEmail,
               newCategory,
             })

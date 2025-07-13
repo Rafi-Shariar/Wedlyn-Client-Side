@@ -37,7 +37,10 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
     mobileNumber,
   } = biodata;
 
-  const [isDisabled, setIsDisabled] = useState( isBiodataInFavourites(userInfo?.favourites), biodata);
+  const [isDisabled, setIsDisabled] = useState(
+    isBiodataInFavourites(userInfo?.favourites),
+    biodata
+  );
 
   const { data: similarBiodatas = [], isLoading } = useQuery({
     queryKey: ["similar-biodatas", biodataId, biodataType],
@@ -52,20 +55,27 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
     },
   });
 
-  const {data, isLoading:CheckingLoading, refetch} = useQuery({
-    queryKey: ['checkRequst', userInfo?.email , biodata?.biodataId],
-    queryFn: async ()=>{
-      const res = await axios.get(`${import.meta.env.VITE_URL}/checkcontactrequest`,{
-        params:{
-          email: userInfo?.email,
-          biodataId: biodata?.biodataId
+  const {
+    data,
+    isLoading: CheckingLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["checkRequst", userInfo?.email, biodata?.biodataId],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_URL}/checkcontactrequest`,
+        {
+          params: {
+            email: userInfo?.email,
+            biodataId: biodata?.biodataId,
+          },
         }
-      })
-      
+      );
+
       return res.data;
     },
-    enabled: !!userInfo?.email && !!biodata?.biodataId
-  })
+    enabled: !!userInfo?.email && !!biodata?.biodataId,
+  });
 
   const handleAddToFavourite = () => {
     const informations = {
@@ -77,19 +87,16 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       .patch(`${import.meta.env.VITE_URL}/addtofavourites`, informations)
       .then(() => {
         successToast();
-        setIsDisabled(true)
+        setIsDisabled(true);
       })
-      .catch(()=>{
+      .catch(() => {
         errorToast();
       });
   };
 
-  const handleContactRequest = () =>{
+  const handleContactRequest = () => {
     refetch();
-  }
-
-
-
+  };
 
   return (
     <div>
@@ -146,14 +153,23 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
 
             {/* Button at Bottom */}
             <div className=" mt-4">
-              {
-                isDisabled? (<><button className="flex items-center justify-center gap-2 w-full bg-red-300 text-white font-semibold px-4 py-2 rounded-xl shadow-md" >
-                Already Added to Favourites
-              </button></>) : (<><button  className={`flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md `} onClick={handleAddToFavourite}>
-                <FaHeartCircleCheck className="text-lg" />
-                Add to Favourite
-              </button></>)
-              }
+              {isDisabled ? (
+                <>
+                  <button className="flex items-center justify-center gap-2 w-full bg-red-300 text-white font-semibold px-4 py-2 rounded-xl shadow-md">
+                    Already Added to Favourites
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={`flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md `}
+                    onClick={handleAddToFavourite}
+                  >
+                    <FaHeartCircleCheck className="text-lg" />
+                    Add to Favourite
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -234,33 +250,52 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
 
       {/* Contact Info */}
       <section className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
-      {/* Header */}
-      <div className="relative mb-4">
-        <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
-        <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
-          <MdLocalPhone className="inline mr-2 mb-1" />
-          Contact Info
-        </h3>
-      </div>
+        {/* Header */}
+        <div className="relative mb-4">
+          <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
+          <h3 className="inline-block relative z-10 bg-white px-4 text-lg font-semibold text-gray-800">
+            <MdLocalPhone className="inline mr-2 mb-1" />
+            Contact Info
+          </h3>
+        </div>
 
-      <div className="text-center">
-        {isLoading ? (
-          <p className="text-gray-500">Checking request status...</p>
-        ) : data?.requested ? (
-          <p className="text-green-600 font-semibold">
-            Already Requested. Check your dashboard.
-          </p>
-        ) : (
-          <Link
-            to={`/checkout/${biodata?.biodataId}`}
-            onClick={handleContactRequest}
-            className="bg-yellow-300 p-3 px-6 border rounded-3xl font-semibold hover:border-yellow-300 hover:bg-white hover:text-yellow-400"
-          >
-            Request Contact Information
-          </Link>
-        )}
-      </div>
-    </section>
+        <div>
+          {userInfo?.category === "premium" ? (
+            <>
+              <div className="border border-gray-300 rounded-md overflow-hidden shadow-sm">
+                <div className="grid grid-cols-2 bg-primary text-white text-center font-semibold py-2 px-4 border-b border-gray-300">
+                  <p>Contact Number</p>
+                  <p>Email</p>
+                </div>
+                <div className="grid grid-cols-2 text-center py-3 px-4">
+                  <p>{mobileNumber}</p>
+                  <p>{contactEmail} kg</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="text-center">
+                {isLoading ? (
+                  <p className="text-gray-500">Checking request status...</p>
+                ) : data?.requested ? (
+                  <p className="text-green-600 font-semibold">
+                    Already Requested. Check your dashboard.
+                  </p>
+                ) : (
+                  <Link
+                    to={`/checkout/${biodata?.biodataId}`}
+                    onClick={handleContactRequest}
+                    className="bg-yellow-300 p-3 px-6 border rounded-3xl font-semibold hover:border-yellow-300 hover:bg-white hover:text-yellow-400"
+                  >
+                    Request Contact Information
+                  </Link>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
 
       {/* Suggestions */}
       <section className="mt-10 bg-gray-50 p-7 rounded-3xl">
@@ -290,8 +325,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
           )}
         </div>
       </section>
-       <Toaster position="top-right"
-        reverseOrder={false}/>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
