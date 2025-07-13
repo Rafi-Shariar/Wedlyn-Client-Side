@@ -23,6 +23,7 @@ import MakePremiumPage from "../pages/Dashboard/Admin/MakePremiumPage";
 import SuccessStoriesPage from "../pages/Dashboard/Admin/SuccessStoriesPage";
 import GotMarriedPage from "../pages/Dashboard/User/GotMarriedPage";
 import PaymentSuccess from "../components/Payment/PaymentSuccess";
+import ApproveContactRequestPage from "../pages/Dashboard/Admin/ApproveContactRequestPage";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
       {path:'approvedpremium', element:<MakePremiumPage></MakePremiumPage>},
       {path:'successstories', element:<SuccessStoriesPage></SuccessStoriesPage>},
       {path:'gotmarried', element:<GotMarriedPage></GotMarriedPage>},
+      {path:'approvedcontactrequest', element:<ApproveContactRequestPage></ApproveContactRequestPage>},
 
     ]
   }
