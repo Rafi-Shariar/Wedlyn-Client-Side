@@ -48,6 +48,13 @@ const MyContactRequestPage = () => {
       {/* table */}
       <div className="overflow-x-auto max-w-5xl mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">My Contact Requests</h2>
+      <div className="">
+        {
+          userInfo?.category === "premium" ? (<>
+           <p className="text-center py-6 text-green-400 font-semibold">You Are Now A Premium User, You Can Directly Access Contact Informations without Any Request.</p>
+          </>) : (<></>)
+        }
+      </div>
       <Table>
         <TableHead className="text-base">
           <TableRow>
