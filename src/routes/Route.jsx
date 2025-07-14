@@ -14,6 +14,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import ManageUsersPage from "../pages/Dashboard/Admin/ManageUsersPage";
 import AdminRoutes from "../privateRoutes/AdminRoutes";
+import UserRoutes from "../privateRoutes/UserRoutes";
 import EditBiodataPage2 from "../pages/Dashboard/User/EditBiodataPage2";
 import CreateNewBiodataPage from "../pages/Dashboard/User/CreateNewBiodataPage";
 import ViewBiodataPage from "../pages/Dashboard/User/ViewBiodataPage";
@@ -50,16 +51,19 @@ export const router = createBrowserRouter([
     children:[
       {index:true, element:<DashboardHome></DashboardHome>},
       {path:'manageusers', element:<AdminRoutes><ManageUsersPage></ManageUsersPage></AdminRoutes>},
-      {path:'editbiodata' , element:<EditBiodataPage2></EditBiodataPage2>},
-      {path:'editbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>},
-      {path:'viewbiodata', element:<ViewBiodataPage></ViewBiodataPage>},
-      {path:'viewbiodata/createbiodata', element:<CreateNewBiodataPage></CreateNewBiodataPage>},
-      {path:'mycontactrequest', element:<MyContactRequestPage></MyContactRequestPage>},
-      {path:'favouritebiodata', element:<MyFavouriteBiodataPage></MyFavouriteBiodataPage>},
-      {path:'approvedpremium', element:<MakePremiumPage></MakePremiumPage>},
-      {path:'successstories', element:<SuccessStoriesPage></SuccessStoriesPage>},
-      {path:'gotmarried', element:<GotMarriedPage></GotMarriedPage>},
-      {path:'approvedcontactrequest', element:<ApproveContactRequestPage></ApproveContactRequestPage>},
+      {path:'approvedpremium', element:<AdminRoutes><MakePremiumPage></MakePremiumPage></AdminRoutes>},
+      {path:'successstories', element:<AdminRoutes><SuccessStoriesPage></SuccessStoriesPage></AdminRoutes>},
+      {path:'approvedcontactrequest', element:<AdminRoutes><ApproveContactRequestPage></ApproveContactRequestPage></AdminRoutes>},
+
+
+      {path:'editbiodata' , element:<UserRoutes><EditBiodataPage2></EditBiodataPage2></UserRoutes>},
+      {path:'editbiodata/createbiodata', element:<UserRoutes><CreateNewBiodataPage></CreateNewBiodataPage></UserRoutes>},
+      {path:'viewbiodata', element:<UserRoutes><ViewBiodataPage></ViewBiodataPage></UserRoutes>},
+      {path:'viewbiodata/createbiodata', element:<UserRoutes><CreateNewBiodataPage></CreateNewBiodataPage></UserRoutes>},
+      {path:'mycontactrequest', element:<UserRoutes><MyContactRequestPage></MyContactRequestPage></UserRoutes>},
+      {path:'favouritebiodata', element:<UserRoutes><MyFavouriteBiodataPage></MyFavouriteBiodataPage></UserRoutes>},
+      
+      {path:'gotmarried', element:<UserRoutes><GotMarriedPage></GotMarriedPage></UserRoutes>},
 
     ]
   }

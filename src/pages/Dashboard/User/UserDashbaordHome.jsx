@@ -8,6 +8,7 @@ const UserDashboardHome = () => {
 
       {/* Pricing Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        
 
         {/* Premium Member Card */}
         <div className="bg-white p-6 rounded-2xl shadow-lg text-center border hover:shadow-xl transition">

@@ -1,10 +1,9 @@
 import React, { use } from 'react';
-
 import { AuthContext } from '../context/AuthContext';
 import LottiLoading from '../components/shared/LottiLoading';
 import Forbidden from '../components/shared/Forbidden';
 
-const AdminRoutes = ({children}) => {
+const UserRoutes = ({children}) => {
 
     const {userInfo,loading} = use(AuthContext);
 
@@ -12,14 +11,12 @@ const AdminRoutes = ({children}) => {
         return <LottiLoading/>;
     }
 
-    console.log(userInfo);
-    
 
-    if(userInfo && userInfo?.role !== 'admin'){
+    if(userInfo && userInfo?.role !== 'user'){
         return <Forbidden/>;
     }
 
     return children;
 };
 
-export default AdminRoutes;
+export default UserRoutes;

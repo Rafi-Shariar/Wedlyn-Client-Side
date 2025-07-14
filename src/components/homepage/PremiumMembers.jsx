@@ -18,13 +18,13 @@ const PremiumMembers = () => {
 
 
   return (
-    <div>
+    <div className="bg-gradient-to-r from-sky-700 via-primary to-green-600 px-4 pb-4 md:px-10 md:pb-10 mt-16 rounded-3xl">
       {/* title */}
       <div className="px-4 py-12 sm:px-6 lg:px-8 text-center mx-auto">
-        <h1 className="text-4xl font-bold text-white bg-primary inline-block px-6 py-3 rounded-xl shadow mb-6">
+        <h1 className="text-4xl font-bold text-white mb-6">
           Premium Member
         </h1>
-        <p className="text-gray-400 text-xm leading-relaxed">
+        <p className="text-gray-300 text-xm leading-relaxed">
           Becoming a <strong>Premium Member</strong> at Wedlyn means unlocking
           exclusive features that bring you closer to finding your perfect life
           partner. Our premium service is designed to provide verified, serious,

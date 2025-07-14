@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 import { FaMoneyBillWave } from "react-icons/fa";
 
 // Light pastel color palette
-const COLORS = ["#A5D8FF", "#FFC9DE", "#FFDCA5", "#D3F9D8"];
+const COLORS = ["#59A6E1", "#f792b9", "#f0c889", "#aaf9b4"];
 
 const DashboardBiodataStats = ({ stats }) => {
   const {

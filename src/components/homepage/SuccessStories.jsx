@@ -21,8 +21,8 @@ const SuccessStories = () => {
 
   return (
     <div>
-      <div className="px-4 py-12 sm:px-6 lg:px-8 text-center mx-auto">
-        <h1 className="text-4xl font-bold text-primary inline-block px-6 py-3 rounded-xl shadow shadow-primary mb-6">
+      <div className="px-4 py-16 sm:px-6 lg:px-8 text-center mx-auto">
+        <h1 className="text-4xl font-bold text-primary mb-6">
           Real Stories, Real Connections
         </h1>
         <p className="text-gray-600 text-base leading-relaxed  mx-auto">

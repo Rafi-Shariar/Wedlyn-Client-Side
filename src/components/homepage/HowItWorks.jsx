@@ -6,8 +6,8 @@ export const HowItWorks = () => {
     <div>
       {/* Title */}
       {/* How It Works Title */}
-      <div className="px-4 py-12 sm:px-6 lg:px-8 text-center mx-auto">
-        <h1 className="text-4xl font-bold text-white bg-primary inline-block px-6 py-3 rounded-xl shadow mb-6">
+      <div className="px-4 py-16 sm:px-6 lg:px-8 text-center mx-auto">
+        <h1 className="text-4xl font-bold text-primary mb-6">
           Few Steps To Your Happy Life
         </h1>
         <p className="text-gray-400 text-xm leading-relaxed  mx-auto">
