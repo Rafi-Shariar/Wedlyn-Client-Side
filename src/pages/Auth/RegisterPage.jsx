@@ -59,7 +59,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-300 via-green-600 to-green-800 rounded-2xl mt-10 p-3 ">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary/80 via-sky-900 to-primary/80 rounded-2xl mt-10 p-3 ">
       <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row bg-white shadow-2xl rounded-2xl overflow-hidden animate-fade-in">
         {/* Left: Illustration */}
         <div className="flex  items-center justify-center md:w-1/2 bg-purple-100 p-10">

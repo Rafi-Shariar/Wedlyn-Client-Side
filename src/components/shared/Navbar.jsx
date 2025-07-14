@@ -65,12 +65,12 @@ const Navbar2 = () => {
       </NavLink>
       <h1 className="hidden lg:inline text-4xl text-white">|</h1>
       <NavLink to={"/dashboard"}>
-        <Button color="none" className="bg-yellow-300 hover:bg-accent">
+        <Button color="none" className="bg-yellow-300 hover:bg-yellow-100">
           Dashboard
         </Button>
       </NavLink>
       <NavLink to={"/login"}>
-        <Button color="none" className="bg-secondary hover:bg-accent" onClick={handleLogout}>
+        <Button color="none" className="bg-secondary text-white hover:bg-accent hover:text-primary" onClick={handleLogout}>
           Logout
         </Button>
       </NavLink>

@@ -2,10 +2,9 @@ import React from "react";
 import bannerIMG from "../../assets/bannerIMG.jpg"; // Use a meaningful romantic or cultural image
 import { FaArrowRightLong } from "react-icons/fa6";
 import BlurText from "../ui/BlurText";
+import ShinyText from "../ui/ShinyText";
 const Banner = () => {
-  const handleAnimationComplete = () => {
-    console.log("Animation completed!");
-  };
+ 
   return (
     <section className="relative bg-gradient-to-br from-primary/20 via-primary/70 to-primary/20 rounded-3xl overflow-hidden max-w-7xl mx-auto mt-6 shadow-md">
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[600px] px-6 lg:px-12 py-16 gap-10">
@@ -23,10 +22,9 @@ const Banner = () => {
             </h1>
             <BlurText
               text="Perfect Match"
-              delay={150}
+              delay={450}
               animateBy="words"
               direction="top"
-              onAnimationComplete={handleAnimationComplete}
               className="text-3xl sm:text-5xl font-bold text-primary leading-tight"
             />
             <h1 className="text-3xl sm:text-5xl font-bold text-gray-800 leading-tight">

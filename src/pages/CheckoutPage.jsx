@@ -10,7 +10,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_payment_key);
 import { AuthContext } from "../context/AuthContext";
 
 const CheckoutPage = () => {
-  // TODO implement payments
+
 
   const { id } = useParams();
   const { userInfo} = use(AuthContext);

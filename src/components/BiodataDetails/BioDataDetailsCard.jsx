@@ -176,7 +176,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* Address info */}
-      <section className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
@@ -200,7 +200,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* parents info */}
-      <section className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
@@ -223,7 +223,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* Expected Partner */}
-      <section className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
@@ -249,7 +249,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* Contact Info */}
-      <section className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />

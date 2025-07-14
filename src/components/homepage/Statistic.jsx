@@ -19,7 +19,7 @@ export const Statistic = () => {
   }, []);
 
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 bg-gradient-to-l from-primary via-accent to-secondary mt-16 rounded-3xl">
+    <div data-aos="zoom-in" data-aos-duration="1000" className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 bg-gradient-to-l from-primary via-accent to-secondary mt-16 rounded-3xl">
       <div className="grid gap-10 row-gap-8 lg:grid-cols-3">
         {/* Women */}
         <div className="text-center">

@@ -16,7 +16,7 @@ const BiodataCard = ({ biodata }) => {
   const isPremium = category?.toLowerCase() === "premium";
 
   return (
-    <div className="relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 group">
+    <div data-aos="fade-up" className="relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 group">
       {/* Premium Ribbon */}
       {isPremium && (
         <div className="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1 z-10 shadow-sm border border-yellow-300">

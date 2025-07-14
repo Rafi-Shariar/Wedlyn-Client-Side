@@ -11,7 +11,7 @@ const RootLayout = () => {
         <div>
             <ScrollToTop/>
             <Navbar></Navbar>
-            <section className='max-w-7xl mx-auto p-2 min-h-screen'>
+            <section className='max-w-7xl mx-auto p-2 min-h-screen '>
                 <Outlet></Outlet>
             </section>
             <Footer></Footer>
