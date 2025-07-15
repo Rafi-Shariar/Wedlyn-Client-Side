@@ -3,7 +3,6 @@ import { FaHome } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
 import { BsPersonHeart } from "react-icons/bs";
 import { MdLocalPhone } from "react-icons/md";
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 const successToast = () => toast.success("Request Successfull");
 const errorToast = () => toast.error("Request Failed ! Try Again.");
@@ -34,11 +33,10 @@ const MyBiodata = ({ biodata }) => {
     mobileNumber,
   } = biodata;
 
-  //todo : handle button to make premium
 
   const axiosSecure = useAxiosSecure();
 
-  const {userInfo,loading} = use(AuthContext);
+  const {loading} = use(AuthContext);
 
 
   const handleMakePrimium =()=>{

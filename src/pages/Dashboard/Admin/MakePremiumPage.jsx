@@ -22,7 +22,6 @@ const MakePremiumPage = () => {
     },
   });
 
-  //todo : add confirmation modal
 
   const handleMakePremium = async (biodataId) => {
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LoadingCardsContainer from "./LoadingCardsContainer";
 import BiodataCard from "./BiodataCard";
 import { useQuery } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ const PremiumMembers = () => {
     const { data: biodatas={}, isLoading} = useQuery({
       queryKey:['premium-biodatas'],
       queryFn: async ()=>{
-         const res = await axios.get(`${import.meta.env.VITE_URL}/biodatas?category=premium&limit=6`);
+         const res = await axios.get(`${import.meta.env.VITE_URL}/premiumbiodats`);
          return res.data;
       }
     })
