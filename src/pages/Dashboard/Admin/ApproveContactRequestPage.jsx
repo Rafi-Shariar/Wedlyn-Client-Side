@@ -14,15 +14,17 @@ import { CheckCircle } from 'lucide-react';import {
 import toast, { Toaster } from 'react-hot-toast';
 const successToast = () => toast.success('Approved Successfully');
 const errorToast = () => toast.error('Error occured! Try Again Later');
-
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ApproveContactRequestPage = () => {
+
+  const axiosSecure = useAxiosSecure();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["allContactRequests"],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_URL}/allcontactrequests`
+      const res = await axiosSecure.get(
+        `/allcontactrequests`
       );
       return res.data;
     },
@@ -30,7 +32,7 @@ const ApproveContactRequestPage = () => {
 
   const handleApprove = (id) =>{
     
-    axios.patch(`${import.meta.env.VITE_URL}/approvecontact/${id}`)
+    axiosSecure.patch(`/approvecontact/${id}`)
     .then(()=>{
         successToast();
         refetch();

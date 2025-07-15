@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { FaHome } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
 import { BsPersonHeart } from "react-icons/bs";
@@ -7,6 +7,9 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 const successToast = () => toast.success("Request Successfull");
 const errorToast = () => toast.error("Request Failed ! Try Again.");
+import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import { AuthContext } from "../../../Context/AuthContext";
+import  Lottiloading from '../../../components/shared/LottiLoading';
 const MyBiodata = ({ biodata }) => {
   const {
     biodataId,
@@ -31,10 +34,16 @@ const MyBiodata = ({ biodata }) => {
     mobileNumber,
   } = biodata;
 
+  //todo : handle button to make premium
+
+  const axiosSecure = useAxiosSecure();
+
+  const {userInfo,loading} = use(AuthContext);
+
 
   const handleMakePrimium =()=>{
 
-    axios.post(`${import.meta.env.VITE_URL}/makepremium`, biodata)
+    axiosSecure.post(`/makepremium`, biodata)
     .then(()=>{
       successToast();
     })
@@ -44,6 +53,8 @@ const MyBiodata = ({ biodata }) => {
     
 
   }
+
+  if(loading) return <Lottiloading/>;
 
 
   return (

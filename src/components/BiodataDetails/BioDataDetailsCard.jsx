@@ -11,9 +11,12 @@ import { BsPersonHeart } from "react-icons/bs";
 import { MdLocalPhone } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 import { isBiodataInFavourites } from "../../assets/checkAddToFavourites";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const successToast = () => toast.success("Added To Favourites");
 const errorToast = () => toast.error("Error Occured! Try Again.");
 const BioDataDetailsCard = ({ biodata, userInfo }) => {
+
+  const axiosSecure = useAxiosSecure();
   const {
     biodataId,
     biodataType,
@@ -83,8 +86,8 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       biodata,
     };
 
-    axios
-      .patch(`${import.meta.env.VITE_URL}/addtofavourites`, informations)
+    axiosSecure
+      .patch(`/addtofavourites`, informations)
       .then(() => {
         successToast();
         setIsDisabled(true);

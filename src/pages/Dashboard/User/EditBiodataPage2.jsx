@@ -7,8 +7,11 @@ import CreateBiodata from '../../../components/EditBiodata/CreateBiodata';
 import EditExistingBiodata from './EditExistingBiodata';
 import { Link } from 'react-router';
 import { IoCreate } from 'react-icons/io5';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const EditBiodataPage2 = () => {
+
+  const axiosSecure = useAxiosSecure();
 
 
     const { userInfo } = use(AuthContext);
@@ -17,8 +20,8 @@ const EditBiodataPage2 = () => {
     const { data: biodata, isLoading, refetch } = useQuery({
     queryKey: ["user-biodata", userInfo?.email],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_URL}/biodata-by-email?email=${userInfo.email}`
+      const res = await axiosSecure.get(
+        `/biodata-by-email?email=${userInfo.email}`
       );
       return res.data;
     },

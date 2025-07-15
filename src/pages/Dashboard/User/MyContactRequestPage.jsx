@@ -13,16 +13,18 @@ import {
   TableRow,
 } from "flowbite-react";
 import toast, { Toaster } from 'react-hot-toast';
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const successToast = () => toast.success('Contact Request Deleted Successfully');
 const errorToast = () => toast.error('Error occured! Try Again Later');
 const MyContactRequestPage = () => {
   const { userInfo } = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["myContactRequets", userInfo?.email],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_URL}/contactrequests?email=${userInfo?.email}`
+      const res = await axiosSecure.get(
+        `/contactrequests?email=${userInfo?.email}`
       );
       return res.data;
     },
@@ -31,7 +33,7 @@ const MyContactRequestPage = () => {
 
   const handleDelete = (id) =>{
     
-    axios.delete(`${import.meta.env.VITE_URL}/deletecontactrequest/${id}`)
+    axiosSecure.delete(`/deletecontactrequest/${id}`)
     .then(()=>{
         successToast();
         refetch();

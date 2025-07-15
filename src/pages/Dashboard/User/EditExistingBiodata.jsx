@@ -6,9 +6,13 @@ import LottiLoading from "../../../components/shared/LottiLoading";
 
 const successToast = () => toast.success("Biodata Updated");
 const errorToast = () => toast.error("Error updating! Try Again.");
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const EditExistingBiodata = ({ biodata, setUpdated }) => {
-  const {
+
+  const axiosSecure = useAxiosSecure();
+
+    const {
     register,
     handleSubmit,
     setValue,
@@ -56,8 +60,8 @@ const EditExistingBiodata = ({ biodata, setUpdated }) => {
   };
 
   const onSubmit = (data) => {
-    axios
-      .put(`${import.meta.env.VITE_URL}/biodata/${biodata?.biodataId}`, data)
+    axiosSecure
+      .put(`/biodata/${biodata?.biodataId}`, data)
       .then(() => {
         successToast();
         setUpdated(true);

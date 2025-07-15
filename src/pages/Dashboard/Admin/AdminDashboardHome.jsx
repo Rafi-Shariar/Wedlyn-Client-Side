@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import React from "react";
 import DashboardBiodataStats from "../../../components/Dashboards/DashboardBiodataStats";
-
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const AdminDashboardHome = () => {
+  const axiosSecure = useAxiosSecure();
   const { data: stats = {} } = useQuery({
     queryKey: ["getstats"],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/adminstats`);
+      const res = await axiosSecure.get(`/adminstats`);
       return res.data;
     },
   });

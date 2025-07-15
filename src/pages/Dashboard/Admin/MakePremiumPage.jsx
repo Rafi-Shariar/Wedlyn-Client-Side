@@ -3,10 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import LottiLoading from '../../../components/shared/LottiLoading';
 import toast, { Toaster } from 'react-hot-toast';
-import axios from "axios";
 const successToast = () => toast.success('Biodata Updated to Premium');
 const errorToast = () => toast.error('Error occured! Try Again.');
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 const MakePremiumPage = () => {
+
+  const axiosSecure = useAxiosSecure();
   const {
     data: premiumRequests = [],
     isLoading,
@@ -14,7 +17,7 @@ const MakePremiumPage = () => {
   } = useQuery({
     queryKey: ['premium-requests'],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/premium-requests`);
+      const res = await axiosSecure.get(`/premium-requests`);
       return res.data;
     },
   });
@@ -23,7 +26,7 @@ const MakePremiumPage = () => {
 
   const handleMakePremium = async (biodataId) => {
 
-    await axios.put(`${import.meta.env.VITE_URL}/makepremium/${biodataId}`)
+    await axiosSecure.put(`/makepremium/${biodataId}`)
     .then(()=>{
         successToast();
         refetch();

@@ -15,11 +15,13 @@ import {
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const successToast = () => toast.success("Biodata Created Successfully.");
 const errorToast = () => toast.error("Error occured! Try Again.");
 const CreateNewBiodataPage = () => {
   const { userInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const { register, handleSubmit } = useForm();
 
@@ -62,8 +64,8 @@ const CreateNewBiodataPage = () => {
     };
 
 
-    axios
-      .post(`${import.meta.env.VITE_URL}/createbiodata`, formattedData)
+    axiosSecure
+      .post(`/createbiodata`, formattedData)
       .then(() => {
         successToast();
         navigate('/dashboard');

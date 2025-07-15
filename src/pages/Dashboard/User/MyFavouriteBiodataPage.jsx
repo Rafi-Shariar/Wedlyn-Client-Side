@@ -6,16 +6,18 @@ import LottiLoading from '../../../components/shared/LottiLoading';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const successToast = () => toast.success('Removed from favourites');
 const errorToast = () => toast.error('Error occurred ! Try Again.');
 const MyFavouriteBiodataPage = () => {
   const { userInfo } = React.useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   // Fetch all favourite biodatas using TanStack Query
   const { data: favourites = [], isLoading, refetch } = useQuery({
     queryKey: ['favourites', userInfo?.email],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/myfavourites/${userInfo?.email}`);
+      const res = await axiosSecure.get(`/myfavourites/${userInfo?.email}`);
       return res.data;
     },
     enabled: !!userInfo?.email
@@ -23,7 +25,7 @@ const MyFavouriteBiodataPage = () => {
 
   const handleDelete = async (biodataId) => {
 
-      await axios.delete(`${import.meta.env.VITE_URL}/favourites/${userInfo.email}/${biodataId}`)
+      await axiosSecure.delete(`/favourites/${userInfo.email}/${biodataId}`)
       .then(()=>{
         successToast();
        refetch();

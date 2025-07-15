@@ -2,7 +2,6 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-
 const CheckOutForm = ({userInfo,biodata}) => {
   
   const stripe = useStripe();
@@ -71,7 +70,7 @@ const CheckOutForm = ({userInfo,biodata}) => {
           
           axios.post(`${import.meta.env.VITE_URL}/requestcontactdetails`,requestContact)
           .then(() =>{
-                axios.patch(`${import.meta.env.VITE_URL}/updaterevenue`,{amount: 5})
+                axios.patch(`/updaterevenue`,{amount: 5})
                 .then(()=>{
                     navigate('/paymentsuccess')
 

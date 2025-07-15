@@ -6,14 +6,16 @@ import LottiLoading from '../../../components/shared/LottiLoading';
 import { AuthContext } from '../../../context/AuthContext';
 import { IoCreate } from "react-icons/io5";
 import { Link } from 'react-router';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ViewBiodataPage = () => {
   const { userInfo } = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const { data: biodata = null, isLoading } = useQuery({
     queryKey: ['specific-biodata'],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/mybiodata/${userInfo?.email}`);
+      const res = await axiosSecure.get(`/mybiodata/${userInfo?.email}`);
       return res.data;
     },
     enabled: !!userInfo?.email

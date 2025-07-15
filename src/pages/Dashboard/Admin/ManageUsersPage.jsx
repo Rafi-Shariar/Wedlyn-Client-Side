@@ -8,7 +8,6 @@ import {
   TableRow,
 } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import {
   FaUserShield,
   FaStar,
@@ -16,6 +15,7 @@ import {
   FaStarHalfAlt,
 } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: "btn btn-success",
@@ -25,11 +25,12 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 const ManageUsersPage = () => {
 
-    const [search, setSearch] = useState("");
+  const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
   const { data: users = [], refetch } = useQuery({
     queryKey: ["get-usersinfo", search],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/usersinfo?search=${search}`);
+      const res = await axiosSecure.get(`/usersinfo?search=${search}`);
       return res.data;
     },
   });
@@ -47,8 +48,8 @@ const ManageUsersPage = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          axios
-            .patch(`${import.meta.env.VITE_URL}/updateusercategory`, {
+          axiosSecure
+            .patch(`/updateusercategory`, {
               userEmail,
               newCategory,
             })
@@ -96,8 +97,8 @@ const ManageUsersPage = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          axios
-            .patch(`${import.meta.env.VITE_URL}/updateuserrole`, {
+          axiosSecure
+            .patch(`/updateuserrole`, {
               userEmail,
               newRole,
             })
@@ -132,9 +133,9 @@ const ManageUsersPage = () => {
       });
   };
 
-  const handleSearchChange = e =>{
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
   return (
     <div>
@@ -176,15 +177,17 @@ const ManageUsersPage = () => {
                   <td className="px-6 py-4 text-gray-700">{user.email}</td>
                   <td className="px-6 py-4">
                     {user.role === "admin" ? (
-                      <button  onClick={() =>
-                          handleUserRole(user.email, "user")
-                        } className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer">
+                      <button
+                        onClick={() => handleUserRole(user.email, "user")}
+                        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+                      >
                         <FaUserTimes /> Cancel Admin
                       </button>
                     ) : (
-                      <button  onClick={() =>
-                          handleUserRole(user.email, "admin")
-                        } className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer">
+                      <button
+                        onClick={() => handleUserRole(user.email, "admin")}
+                        className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+                      >
                         <FaUserShield /> Make Admin
                       </button>
                     )}

@@ -11,8 +11,6 @@ const AdminRoutes = ({children}) => {
     if(loading){
         return <LottiLoading/>;
     }
-
-    console.log(userInfo);
     
 
     if(userInfo && userInfo?.role !== 'admin'){
