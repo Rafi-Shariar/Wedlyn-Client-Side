@@ -25,6 +25,7 @@ import SuccessStoriesPage from "../pages/Dashboard/Admin/SuccessStoriesPage";
 import GotMarriedPage from "../pages/Dashboard/User/GotMarriedPage";
 import PaymentSuccess from "../components/Payment/PaymentSuccess";
 import ApproveContactRequestPage from "../pages/Dashboard/Admin/ApproveContactRequestPage";
+import TermsAndConditions from "../pages/TermsAndConditions";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ export const router = createBrowserRouter([
       {path:'/biodatadetails/:id',element:<PrivateRoute><BiodataDetailsPage></BiodataDetailsPage></PrivateRoute>},
       {path:'/checkout/:id',element: <CheckoutPage></CheckoutPage>},
       {path:'/paymentsuccess',element: <PaymentSuccess></PaymentSuccess>},
+      {path:'/terms',element: <TermsAndConditions></TermsAndConditions>},
 
     ]
   },
