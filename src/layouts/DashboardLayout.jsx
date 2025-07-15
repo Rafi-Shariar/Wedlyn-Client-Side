@@ -34,37 +34,42 @@ const DashboardLayout = () => {
 
   if(loading) return <LottiLoading/>
 
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-primary font-medium bg-white p-2 rounded-lg"
+      : "text-white hover:text-yellow-300 transition";
+
   const userlinks = (
     <>
       <h1 className="text-gray-400">Menu</h1>
-      <NavLink to={"/dashboard"} >
+      <NavLink to={"/dashboard"} end className ={navLinkClass}>
         <MdDashboard className="inline mr-2 mb-1" />
         Dashboard
       </NavLink>
-      <NavLink to={"/dashboard/editbiodata"}>
+      <NavLink to={"/dashboard/editbiodata"} className={navLinkClass}>
         <FaPenAlt className="inline mr-2 mb-1" />
         Edit Biodata
       </NavLink>
-      <NavLink to={"/dashboard/viewbiodata"}>
+      <NavLink to={"/dashboard/viewbiodata"} className={navLinkClass}>
         <CiViewList className="inline mr-2 mb-1" />
         View Biodata
       </NavLink>
-      <NavLink to={"/dashboard/mycontactrequest"}>
+      <NavLink to={"/dashboard/mycontactrequest"} className={navLinkClass}>
         <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
         My Contact Request
       </NavLink>
-      <NavLink to={"/dashboard/favouritebiodata"}>
-        <IoHeartCircleOutline className="inline mr-2 mb-1" />
+      <NavLink to={"/dashboard/favouritebiodata"} className={navLinkClass}>
+        <IoHeartCircleOutline className="inline mr-2 mb-1"/>
         Favourite Biodata
       </NavLink>
-       <NavLink to={"/dashboard/gotmarried"}>
+       <NavLink to={"/dashboard/gotmarried"} className={navLinkClass}>
         <FaUserFriends className="inline mr-2 mb-1" />
         Got Married
       </NavLink>
 
       <div className="flex flex-col gap-3 mt-20">
         <h1 className="text-gray-400">General</h1>
-        <NavLink to={"/"}>
+        <NavLink to={"/"} >
           <FaArrowLeftLong className="inline mr-2 mb-1" />
           Back to Website
         </NavLink>
@@ -79,23 +84,23 @@ const DashboardLayout = () => {
   const adminlinks = (
     <>
       <h1 className="text-gray-400">Menu</h1>
-      <NavLink to={"/dashboard"}>
+      <NavLink to={"/dashboard"} end className={navLinkClass}>
         <MdDashboard className="inline mr-2 mb-1" />
         Dashboard
       </NavLink>
-      <NavLink to={"/dashboard/manageusers"}>
+      <NavLink to={"/dashboard/manageusers"} className={navLinkClass}>
         <FaPenAlt className="inline mr-2 mb-1" />
         Manage Users
       </NavLink>
-      <NavLink to={"/dashboard/approvedpremium"}>
+      <NavLink to={"/dashboard/approvedpremium"} className={navLinkClass}>
         <CiViewList className="inline mr-2 mb-1" />
         Approved Premium
       </NavLink>
-      <NavLink to={"/dashboard/approvedcontactrequest"}>
+      <NavLink to={"/dashboard/approvedcontactrequest"} className={navLinkClass}>
         <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
         Approved Contact Request
       </NavLink>
-       <NavLink to={"/dashboard/successstories"}>
+       <NavLink to={"/dashboard/successstories"} className={navLinkClass}>
         <VscGitPullRequestGoToChanges className="inline mr-2 mb-1" />
         Success Stories
       </NavLink>
@@ -122,7 +127,7 @@ const DashboardLayout = () => {
         <>
           <div className="flex min-h-screen ">
             {/* Sidebar for desktop */}
-            <aside className="hidden lg:block w-64 shadow-md p-4 bg-primary/90 sticky top-0 h-screen">
+            <aside className="hidden lg:block w-72 shadow-md p-4 bg-primary/90 sticky top-0 h-screen">
               <Link to={'/'} className="flex items-center space-x-3">
                 <img src={logo} alt="Logo" className="h-10 w-auto" />
                 <span className="text-white text-2xl font-semibold">

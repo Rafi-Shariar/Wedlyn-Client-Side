@@ -13,7 +13,7 @@ const StoryCard = ({ story }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between max-w-sm w-full h-[320px] mx-4 my-5">
+    <div className="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between max-w-sm w-full h-[320px] ml-2 mr-2 my-5">
       {/* Quote icon and stars */}
       <div className="flex items-center justify-between mb-3">
         <img src={mark} alt="Quote icon" className="w-10 h-10 opacity-30" />

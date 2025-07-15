@@ -22,7 +22,7 @@ const Navbar2 = () => {
 
   const navLinkClass = ({ isActive }) =>
     isActive
-      ? "text-accent font-medium underline"
+      ? "text-yellow-300 font-medium border-b border-l px-2 rounded-lg"
       : "text-white hover:text-accent transition";
 
   const links = (

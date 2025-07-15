@@ -49,7 +49,8 @@ const SuccessStories = () => {
             
               <Marquee >
                {
-                stories.map(story => <StoryCard key={story._id} story={story}></StoryCard>)
+                stories.map(story => <div className="mr-2 ml-2"><StoryCard key={story._id} story={story}></StoryCard></div>
+                )
                }
               </Marquee>
             
