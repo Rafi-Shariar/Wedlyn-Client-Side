@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
-
+import LottiLoading from '../../../components/shared/LottiLoading';
 const SuccessStoriesPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedStory, setSelectedStory] = useState(null);
@@ -23,11 +23,7 @@ const SuccessStoriesPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="text-center py-20 text-primary font-semibold">
-        Loading success stories...
-      </div>
-    );
+    return <LottiLoading/>;
   }
 
   return (

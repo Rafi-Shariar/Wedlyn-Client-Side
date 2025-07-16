@@ -8,17 +8,19 @@ import LottiLoading from "../components/shared/LottiLoading";
 import axios from "axios";
 const stripePromise = loadStripe(import.meta.env.VITE_payment_key);
 import { AuthContext } from "../context/AuthContext";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const CheckoutPage = () => {
 
 
   const { id } = useParams();
   const { userInfo} = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const { data: biodata = {}, isLoading } = useQuery({
     queryKey: ["payforbiodata"],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/biodata/${id}`);
+      const res = await axiosSecure.get(`/biodata/${id}`);
       return res.data;
     },
   });

@@ -23,11 +23,16 @@ const swalWithBootstrapButtons = Swal.mixin({
   },
   buttonsStyling: true,
 });
-const ManageUsersPage = () => {
 
+import LottiLoading from "../../../components/shared/LottiLoading";
+const ManageUsersPage = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["get-usersinfo", search],
     queryFn: async () => {
       const res = await axiosSecure.get(`/usersinfo?search=${search}`);
@@ -137,6 +142,8 @@ const ManageUsersPage = () => {
     setSearch(e.target.value);
   };
 
+  // if(isLoading) return <LottiLoading/>
+
   return (
     <div>
       <div>
@@ -151,76 +158,93 @@ const ManageUsersPage = () => {
       </div>
 
       {/* //table */}
-      <section>
-        <div className="overflow-x-auto mt-6">
-          <table className="min-w-full text-sm text-left">
-            {/* Header */}
-            <thead className="bg-primary text-white">
-              <tr>
-                <th className="px-6 py-3">User Name</th>
-                <th className="px-6 py-3">User Email</th>
-                <th className="px-6 py-3">Make Admin</th>
-                <th className="px-6 py-3">Make Premium</th>
-              </tr>
-            </thead>
 
-            {/* Body */}
-            <tbody className="divide-y divide-gray-200">
-              {users.map((user) => (
-                <tr
-                  key={user._id}
-                  className="bg-white hover:bg-primary/10 transition"
-                >
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-                    {user.name}
-                  </td>
-                  <td className="px-6 py-4 text-gray-700">{user.email}</td>
-                  <td className="px-6 py-4">
-                    {user.role === "admin" ? (
-                      <button
-                        onClick={() => handleUserRole(user.email, "user")}
-                        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+      <div>
+        {isLoading ? (
+          <>
+            <div className="flex justify-center items-center mt-16">
+              <p>Users Loading...</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <section>
+              <div className="overflow-x-auto mt-6">
+                <table className="min-w-full text-sm text-left">
+                  {/* Header */}
+                  <thead className="bg-primary text-white">
+                    <tr>
+                      <th className="px-6 py-3">User Name</th>
+                      <th className="px-6 py-3">User Email</th>
+                      <th className="px-6 py-3">Make Admin</th>
+                      <th className="px-6 py-3">Make Premium</th>
+                    </tr>
+                  </thead>
+
+                  {/* Body */}
+                  <tbody className="divide-y divide-gray-200">
+                    {users.map((user) => (
+                      <tr
+                        key={user._id}
+                        className="bg-white hover:bg-primary/10 transition"
                       >
-                        <FaUserTimes /> Cancel Admin
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleUserRole(user.email, "admin")}
-                        className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
-                      >
-                        <FaUserShield /> Make Admin
-                      </button>
-                    )}
-                  </td>
-                  <td className="px-6 py-4">
-                    {user.category === "premium" ? (
-                      <button
-                        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
-                        name="regular"
-                        onClick={() =>
-                          handleUserCategory(user.email, "regular")
-                        }
-                      >
-                        <FaStarHalfAlt /> Cancel Premium
-                      </button>
-                    ) : (
-                      <button
-                        className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
-                        name="primium"
-                        onClick={() =>
-                          handleUserCategory(user.email, "premium")
-                        }
-                      >
-                        <FaStar /> Make Premium
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+                        <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
+                          {user.name}
+                        </td>
+                        <td className="px-6 py-4 text-gray-700">
+                          {user.email}
+                        </td>
+                        <td className="px-6 py-4">
+                          {user.role === "admin" ? (
+                            <button
+                              onClick={() => handleUserRole(user.email, "user")}
+                              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+                            >
+                              <FaUserTimes /> Cancel Admin
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() =>
+                                handleUserRole(user.email, "admin")
+                              }
+                              className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+                            >
+                              <FaUserShield /> Make Admin
+                            </button>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          {user.category === "premium" ? (
+                            <button
+                              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+                              name="regular"
+                              onClick={() =>
+                                handleUserCategory(user.email, "regular")
+                              }
+                            >
+                              <FaStarHalfAlt /> Cancel Premium
+                            </button>
+                          ) : (
+                            <button
+                              className="flex items-center gap-2 bg-yellow-300 hover:bg-yellow-100 text-yellow-700 px-3 py-1.5 rounded-xl text-sm font-medium shadow hover:cursor-pointer"
+                              name="primium"
+                              onClick={() =>
+                                handleUserCategory(user.email, "premium")
+                              }
+                            >
+                              <FaStar /> Make Premium
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </>
+        )}
+      </div>
     </div>
   );
 };

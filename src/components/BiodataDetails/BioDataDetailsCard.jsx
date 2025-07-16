@@ -179,7 +179,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* Address info */}
-      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section  className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
@@ -203,7 +203,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* parents info */}
-      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section  className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
@@ -226,7 +226,7 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
       </section>
 
       {/* Expected Partner */}
-      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section  className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />
@@ -245,14 +245,14 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
           </div>
           <div className="grid grid-cols-3 text-center py-3 px-4">
             <p>{expectedPartnerAge} year</p>
-            <p>{expectedPartnerHeight} kg</p>
-            <p>{expectedPartnerWeight} feet</p>
+            <p>{expectedPartnerHeight} feet</p>
+            <p>{expectedPartnerWeight} kg</p>
           </div>
         </div>
       </section>
 
       {/* Contact Info */}
-      <section data-aos="fade-left" className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
+      <section  className="max-w-3xl mx-auto mt-10 text-base font-medium text-gray-700">
         {/* Header */}
         <div className="relative mb-4">
           <div className="border-t border-gray-300 w-full absolute top-1/2 left-0" />

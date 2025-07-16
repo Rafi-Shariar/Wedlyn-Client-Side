@@ -57,67 +57,74 @@ const MyContactRequestPage = () => {
           </>) : (<></>)
         }
       </div>
-      <Table>
-        <TableHead className="text-base">
-          <TableRow>
-            <TableHeadCell>Name</TableHeadCell>
-            <TableHeadCell>Biodata ID</TableHeadCell>
-            <TableHeadCell>Status</TableHeadCell>
-            <TableHeadCell>Mobile No</TableHeadCell>
-            <TableHeadCell>Email</TableHeadCell>
-            <TableHeadCell>
-              <span className="sr-only">Delete</span>
-            </TableHeadCell>
-          </TableRow>
-        </TableHead>
-        <TableBody className="divide-y">
-          {data.length > 0 ? (
-            data.map((info) => (
-              <TableRow
-                key={info._id}
-                className="bg-slate-200 text-base"
-              >
-                <TableCell className="whitespace-nowrap font-medium text-gray-900">
-                  {info.requestedContactName}
-                </TableCell>
-                <TableCell><p className="text-gray-800">{info.requestedContactID}</p></TableCell>
-                <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      info.status === "Approved"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {info.status}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <p className="text-black">                  {info.status === "Approved" ? info.mobile : "---"}
-</p>
-                </TableCell>
-                <TableCell>
-                  <p className="text-black">{info.status === "Approved" ? info.email : "---"}</p>
-                </TableCell>
-                <TableCell>
-                  <button
-                    className="text-red-500 hover:text-red-700 transition"
-                    onClick={() => handleDelete(info._id)}
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={6} className="text-center py-4 text-gray-500">
-                No contact requests found.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+      <Table className="bg-white">
+  <TableHead className="text-base bg-slate-100">
+    <TableRow>
+      <TableHeadCell className="text-white">Name</TableHeadCell>
+      <TableHeadCell className="text-white">Biodata ID</TableHeadCell>
+      <TableHeadCell className="text-white">Status</TableHeadCell>
+      <TableHeadCell className="text-white">Mobile No</TableHeadCell>
+      <TableHeadCell className="text-white">Email</TableHeadCell>
+      <TableHeadCell>
+        <span className="sr-only">Delete</span>
+      </TableHeadCell>
+    </TableRow>
+  </TableHead>
+
+  <TableBody className="divide-y divide-slate-200">
+    {data.length > 0 ? (
+      data.map((info) => (
+        <TableRow
+          key={info._id}
+          className="bg-white hover:bg-slate-50 text-base"
+        >
+          <TableCell className="whitespace-nowrap font-medium text-gray-900">
+            {info.requestedContactName}
+          </TableCell>
+          <TableCell>
+            <p className="text-gray-800">{info.requestedContactID}</p>
+          </TableCell>
+          <TableCell>
+            <span
+              className={`px-2 py-1 rounded-full text-xs font-medium ${
+                info.status === "Approved"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-yellow-100 text-yellow-700"
+              }`}
+            >
+              {info.status}
+            </span>
+          </TableCell>
+          <TableCell>
+            <p className="text-black">
+              {info.status === "Approved" ? info.mobile : "---"}
+            </p>
+          </TableCell>
+          <TableCell>
+            <p className="text-black">
+              {info.status === "Approved" ? info.email : "---"}
+            </p>
+          </TableCell>
+          <TableCell>
+            <button
+              className="text-red-500 hover:text-red-700 transition"
+              onClick={() => handleDelete(info._id)}
+            >
+              <Trash2 size={18} />
+            </button>
+          </TableCell>
+        </TableRow>
+      ))
+    ) : (
+      <TableRow>
+        <TableCell colSpan={6} className="text-center py-4 text-gray-500 bg-white">
+          No contact requests found.
+        </TableCell>
+      </TableRow>
+    )}
+  </TableBody>
+</Table>
+
     </div>
 
      <Toaster position="top-right"

@@ -1,7 +1,6 @@
 import React, { use } from 'react';
 import { useParams } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios';
 import LottiLoading from '../components/shared/LottiLoading';
 import BioDataDetailsCard from '../components/BiodataDetails/BioDataDetailsCard';
 import { useQuery } from '@tanstack/react-query';

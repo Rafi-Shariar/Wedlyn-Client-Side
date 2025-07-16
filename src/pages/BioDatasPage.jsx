@@ -16,6 +16,7 @@ const divisions = [
 ];
 
 export const BiodatasPage = () => {
+  document.title = "Wedlyn | Biodatas";
   const [ageRange, setAgeRange] = useState([18, 50]);
   const [biodataType, setBiodataType] = useState("");
   const [division, setDivision] = useState("");

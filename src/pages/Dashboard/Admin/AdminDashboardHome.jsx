@@ -1,17 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-
+import LottiLoading from '../../../components/shared/LottiLoading';
 import React from "react";
 import DashboardBiodataStats from "../../../components/Dashboards/DashboardBiodataStats";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const AdminDashboardHome = () => {
+  document.title = "Wedlyn | Admin Dashboard";
   const axiosSecure = useAxiosSecure();
-  const { data: stats = {} } = useQuery({
+  const { data: stats = {}, isLoading } = useQuery({
     queryKey: ["getstats"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/adminstats`);
       return res.data;
     },
   });
+
+  if(isLoading) return <LottiLoading/>
 
   return (
     <div className="">

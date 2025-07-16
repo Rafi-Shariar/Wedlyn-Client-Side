@@ -2,6 +2,7 @@ import React from 'react';
 import a1 from '../assets/aboutUs/a1.jpg';
 import a2 from '../assets/aboutUs/a2.jpg';
 const AboutUsPage = () => {
+  document.title = "Wedlyn | About Us";
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 space-y-12 text-gray-700">
       {/* Heading */}

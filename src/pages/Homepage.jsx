@@ -6,6 +6,7 @@ import { Statistic } from '../components/homepage/Statistic';
 import SuccessStories from '../components/homepage/SuccessStories';
 
 const Homepage = () => {
+    document.title = "Wedlyn | Home";
     return (
         <div>
             <Banner></Banner>

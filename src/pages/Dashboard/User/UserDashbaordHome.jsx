@@ -9,6 +9,7 @@ import LoveImg from "../../../assets/User Dashboard/lover.png";
 import notificationImg from "../../../assets/User Dashboard/notifications.png";
 import { Link } from "react-router";
 const UserDashboardHome = () => {
+  document.title = "Wedlyn | Dashboard";
   const { userInfo } = use(AuthContext);
   console.log(userInfo);
 
