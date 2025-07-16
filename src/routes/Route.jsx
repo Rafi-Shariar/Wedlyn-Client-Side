@@ -26,6 +26,7 @@ import GotMarriedPage from "../pages/Dashboard/User/GotMarriedPage";
 import PaymentSuccess from "../components/Payment/PaymentSuccess";
 import ApproveContactRequestPage from "../pages/Dashboard/Admin/ApproveContactRequestPage";
 import TermsAndConditions from "../pages/TermsAndConditions";
+import PageNotFound from "../components/shared/PageNotFound";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
       {path:'/checkout/:id',element: <CheckoutPage></CheckoutPage>},
       {path:'/paymentsuccess',element: <PaymentSuccess></PaymentSuccess>},
       {path:'/terms',element: <TermsAndConditions></TermsAndConditions>},
+      {path:'/*',element: <PageNotFound></PageNotFound>},
 
     ]
   },
@@ -66,8 +68,10 @@ export const router = createBrowserRouter([
       {path:'favouritebiodata', element:<UserRoutes><MyFavouriteBiodataPage></MyFavouriteBiodataPage></UserRoutes>},
       
       {path:'gotmarried', element:<UserRoutes><GotMarriedPage></GotMarriedPage></UserRoutes>},
+      
 
     ]
-  }
+  },
+  
 ]);
 
