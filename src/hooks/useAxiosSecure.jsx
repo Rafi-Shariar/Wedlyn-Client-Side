@@ -9,7 +9,6 @@ const useAxiosSecure = () => {
   const { user, logOutUser } = use(AuthContext);
   
   axiosInstance.interceptors.request.use((config) => {
-    console.log(user?.accessToken);
     
     config.headers.authorization = `Bearer ${user.accessToken}`;
     return config;

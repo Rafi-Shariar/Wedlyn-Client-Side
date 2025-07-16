@@ -40,7 +40,6 @@ const CheckOutForm = ({userInfo,biodata}) => {
         }
       );
 
-      console.log(res);
       
 
       const clientSecret = res.data.clientSecret;
@@ -65,20 +64,20 @@ const CheckOutForm = ({userInfo,biodata}) => {
             requestedBy : userInfo.email,
             status: 'pending'
 
-
           }
           
           axios.post(`${import.meta.env.VITE_URL}/requestcontactdetails`,requestContact)
           .then(() =>{
-                axios.patch(`/updaterevenue`,{amount: 5})
+                axios.patch(`${import.meta.env.VITE_URL}/updaterevenue`,{amount: 5})
                 .then(()=>{
                     navigate('/paymentsuccess')
-
                 })
-                  
+                .catch('updated revenuew failed');
+
           })
           .catch(()=>{
-
+            console.log("failed to send request");
+          
           })
 
         }
@@ -87,6 +86,7 @@ const CheckOutForm = ({userInfo,biodata}) => {
 
 
   };
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>

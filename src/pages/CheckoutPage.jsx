@@ -14,7 +14,7 @@ const CheckoutPage = () => {
 
 
   const { id } = useParams();
-  const { userInfo} = use(AuthContext);
+  const { userInfo } = use(AuthContext);
   const axiosSecure = useAxiosSecure();
 
   const { data: biodata = {}, isLoading } = useQuery({
@@ -25,13 +25,9 @@ const CheckoutPage = () => {
     },
   });
 
-  if(isLoading) return <LottiLoading/>
+  if(isLoading || !userInfo) return <LottiLoading/>
 
   
-
-  
-  
-
   return (
     <div>
         <div className="border p-6 max-w-2xl mx-auto my-10 rounded-2xl border-slate-400 flex flex-col justify-center items-center gap-6">

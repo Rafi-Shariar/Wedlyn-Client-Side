@@ -143,6 +143,7 @@ const CreateNewBiodataPage = () => {
           <label className="block font-semibold mb-1">Height (ft)</label>
           <input
             type="number"
+            step="0.1"
             {...register("height", { required: true })}
             className="border border-slate-300 p-2 rounded-lg w-full"
             placeholder="Ex: 5.5"

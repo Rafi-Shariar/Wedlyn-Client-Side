@@ -12,6 +12,7 @@ import { MdLocalPhone } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 import { isBiodataInFavourites } from "../../assets/checkAddToFavourites";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LottiLoading from "../shared/LottiLoading";
 const successToast = () => toast.success("Added To Favourites");
 const errorToast = () => toast.error("Error Occured! Try Again.");
 const BioDataDetailsCard = ({ biodata, userInfo }) => {
@@ -100,6 +101,8 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
   const handleContactRequest = () => {
     refetch();
   };
+
+  if(!userInfo) return <LottiLoading/>;
 
   return (
     <div>
