@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { FaHeartCircleCheck } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
@@ -14,14 +14,13 @@ import { isBiodataInFavourites } from "../../assets/checkAddToFavourites";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LottiLoading from "../shared/LottiLoading";
 const successToast = () => toast.success("Added To Favourites");
-const errorToast = () => toast.error("Error Occured! Try Again.");
+const errorToast = () => toast.error("Already in Favourites");
 const BioDataDetailsCard = ({ biodata, userInfo }) => {
 
   const axiosSecure = useAxiosSecure();
   const {
     biodataId,
     biodataType,
-    category,
     name,
     profileImage,
     dateOfBirth,
@@ -42,9 +41,12 @@ const BioDataDetailsCard = ({ biodata, userInfo }) => {
   } = biodata;
 
   const [isDisabled, setIsDisabled] = useState(
-    isBiodataInFavourites(userInfo?.favourites),
-    biodata
+    isBiodataInFavourites(userInfo?.favourites,biodata)
   );
+
+  useEffect(() => {
+  setIsDisabled(isBiodataInFavourites(userInfo?.favourites, biodata));
+}, [userInfo, biodata]);
 
   const { data: similarBiodatas = [], isLoading } = useQuery({
     queryKey: ["similar-biodatas", biodataId, biodataType],
