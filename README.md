@@ -51,6 +51,12 @@
 - Integrated with **Stripe** for handling $5 payments securely for contact requests.
 
 ---
+## 💼 Admin Credentials
+
+-  **Email:** admin@gmail.com
+-  **Password:** 123456
+
+---
 
 ## 📦 Tech Stack
 
