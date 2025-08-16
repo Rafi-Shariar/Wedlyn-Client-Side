@@ -4,6 +4,7 @@ import PremiumMembers from '../components/homepage/PremiumMembers';
 import { HowItWorks } from '../components/homepage/HowItWorks';
 import { Statistic } from '../components/homepage/Statistic';
 import SuccessStories from '../components/homepage/SuccessStories';
+import WhyChooseUs from '../components/homepage/WhyChooseUs';
 
 const Homepage = () => {
     document.title = "Wedlyn | Home";
@@ -14,6 +15,7 @@ const Homepage = () => {
             <HowItWorks></HowItWorks>
             <Statistic></Statistic>
             <SuccessStories></SuccessStories>
+            <WhyChooseUs></WhyChooseUs>
         </div>
     );
 };
