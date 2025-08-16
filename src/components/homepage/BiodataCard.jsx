@@ -42,7 +42,7 @@ const BiodataCard = ({ biodata }) => {
             Biodata ID: <span className="text-gray-800">{biodataId}</span>
           </h2>
           <p>
-            <span className="font-medium">Type:</span> {biodataType}
+            <span className="font-medium">Gender:</span> {biodataType}
           </p>
           <p>
             <span className="font-medium">Division:</span> {permanentDivision}
