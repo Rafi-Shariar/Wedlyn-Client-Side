@@ -6,6 +6,7 @@ import { Statistic } from '../components/homepage/Statistic';
 import SuccessStories from '../components/homepage/SuccessStories';
 import WhyChooseUs from '../components/homepage/WhyChooseUs';
 import Tips from '../components/homepage/Tips';
+import Newsletter from '../components/homepage/newsLetter';
 
 const Homepage = () => {
     document.title = "Wedlyn | Home";
@@ -18,6 +19,7 @@ const Homepage = () => {
             <SuccessStories></SuccessStories>
             <WhyChooseUs></WhyChooseUs>
             <Tips></Tips>
+            <Newsletter></Newsletter>
         </div>
     );
 };

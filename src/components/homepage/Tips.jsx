@@ -51,7 +51,8 @@ const Tips = () => {
         {/* Right Tip Cards */}
         <div className="space-y-6">
           {tipsData.map((tip, index) => (
-            <div data-aos="fade-left"
+            <div 
+              data-aos="fade-left"
               key={index}
               className="p-5 rounded-xl shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
             >
