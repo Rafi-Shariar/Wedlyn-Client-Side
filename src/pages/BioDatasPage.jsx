@@ -159,7 +159,7 @@ export const BiodatasPage = () => {
         </div>
 
         {/* Desktop Sidebar */}
-        <aside className="hidden lg:block w-1/4 bg-white rounded-xl shadow-md p-6 sticky top-24 self-start">
+        <aside className="hidden lg:block w-1/4 rounded-xl shadow-md p-6 sticky top-24 self-start border border-purple-300 bg-primary text-white">
           <h2 className="text-xl font-semibold mb-6 border-b pb-2">
             Filter Options
           </h2>
@@ -211,7 +211,7 @@ export const BiodatasPage = () => {
               id="division"
               value={division}
               onChange={(e) => setDivision(e.target.value)}
-              className="w-full border border-primary rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border border-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">All Divisions</option>
               {divisions.map((div) => (
